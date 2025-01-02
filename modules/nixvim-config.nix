@@ -15,9 +15,9 @@
         command = "setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab";
       }
     ];
-    #colorschemes.catppuccin.enable = true;
+    colorschemes.catppuccin.enable = true;
     #colorschemes.gruvbox.enable = true;
-    colorschemes.onedark.enable = true;
+    #colorschemes.onedark.enable = true;
     #colorschemes.rose-pine.enable = true;
     #colorschemes.tokyonight.enable = true;
     globals = {
@@ -48,7 +48,7 @@
       }
       {
         mode = "n";
-        action = ":NvimTreeToggle<CR>";
+        action = ":Neotree toggle<CR>";
         key = "<leader>e";
         options.silent = true;
       }
@@ -172,6 +172,9 @@
       fugitive = {
 	      enable = true;
       };
+      lazygit = {
+        enable = true;
+      };
       lsp = {
         enable = true;
 	      keymaps = {
@@ -225,19 +228,25 @@
           };
         };
       };
-      lz-n.enable = true;
-      nvim-tree = {
+      lz-n = {
         enable = true;
-        openOnSetup = true;
-        openOnSetupFile = true;
-        preferStartupRoot = true;
-        respectBufCwd = true;
-        syncRootWithCwd = true;
-        updateFocusedFile = {
-          enable = true;
-          updateRoot = true;
-        };
+        autoLoad = true;
       };
+      neo-tree = {
+        enable = true;
+      };
+      #nvim-tree = {
+      #  enable = true;
+      #  openOnSetup = true;
+      #  openOnSetupFile = true;
+      #  preferStartupRoot = true;
+      #  respectBufCwd = true;
+      #  syncRootWithCwd = true;
+      #  updateFocusedFile = {
+      #    enable = true;
+      #    updateRoot = true;
+      #  };
+      #};
       packer.enable = true;
       telescope = {
         enable = true;
@@ -281,13 +290,13 @@
       };
       transparent.enable = true;
       treesitter = {
-	      enable = true;
-	      settings = {
-	        additional_vim_regex_highlighting = false;
-	        auroinstall = true;
+	    enable = true;
+	    settings = { 
+            additional_vim_regex_highlighting = false;
+            autoinstall = true;
 	        highlight.enable = true;
 	        ensure_installed = [ 
-	          "bash"
+            "bash"
             "c"
             "cpp"
             "c_sharp"
@@ -299,15 +308,24 @@
             "gitignore"
             "html"
             "javascript"
+            "json"
             "lua"
             "markdown"
             "markdown_inline"
             "nix"
+            "python"
+            "query"
+            "regex"
             "rust"
+            "tsx"
             "typescript"
+            "sql"
+            "vim"
+            "yaml"
           ];
 	      };
       };
+      trouble.enable = true;
       toggleterm = {
         enable = true;
         lazyLoad = {
@@ -326,6 +344,10 @@
       };
       vim-css-color.enable = true;
       web-devicons.enable = true;
+      which-key = { 
+        enable = true;
+        autoLoad = true;
+      };
     };
     extraPackages = with pkgs; [
       cargo

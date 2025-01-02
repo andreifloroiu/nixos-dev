@@ -23,6 +23,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    ast-grep
     atuin
     azure-cli
     bat
@@ -34,11 +35,13 @@
     ])
     dust
     eza
+    fd
     fzf
     git
     gh
     google-cloud-sdk
     jq
+    lazygit
     lshw
     mc
     neofetch
