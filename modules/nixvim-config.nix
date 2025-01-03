@@ -290,10 +290,10 @@
       };
       transparent.enable = true;
       treesitter = {
-	    enable = true;
-	    settings = { 
-            additional_vim_regex_highlighting = false;
-            autoinstall = true;
+	      enable = true;
+	      settings = { 
+          additional_vim_regex_highlighting = false;
+          autoinstall = true;
 	        highlight.enable = true;
 	        ensure_installed = [ 
             "bash"
