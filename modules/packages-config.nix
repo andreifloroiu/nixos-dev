@@ -53,6 +53,7 @@
     ripgrep
     tldr
     tmux
+    todoist
     wget
     zsh
   ];
