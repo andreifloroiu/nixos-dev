@@ -109,6 +109,17 @@
       }
       {
         mode = "n";
+        action = ''
+        function()
+          require("which-key").show({ global = false })
+        end
+        '';
+        key = "<leader>?";
+        lua = true;
+        options.silent = true;
+      }
+      {
+        mode = "n";
         action = "<cmd>cnext<CR>zz";
         key = "<C-k>";
       }
