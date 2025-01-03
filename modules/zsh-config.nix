@@ -24,11 +24,12 @@
     ";
     promptInit = "";
     shellAliases = {
+      dust = "dust -X /mnt -X /media";
       la = "eza -lh";
       node22 = "nix shell nixpkgs#nodejs_22";
       node20 = "nix shell nixpkgs#nodejs_20";
       node18 = "nix shell nixpkgs#nodejs_18";
-      dust = "dust -X /mnt -X /media";
+      nvim = "nvim .";
     };
   };
 }

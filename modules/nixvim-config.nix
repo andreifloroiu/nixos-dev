@@ -102,8 +102,8 @@
       }
       {
         mode = "n";
-        key = "<leader>f";
         action = "vim.lsp.buf.format";
+        key = "<leader>f";
         lua = true;
         options.silent = true;
       }
@@ -117,6 +117,12 @@
         action = "<cmd>cprev<CR>zz";
         key = "<C-j>";
       }
+      {
+        mode = "n";
+        action = ":set list!<CR>";
+        key = "<leader>w";
+
+      }
     ];
     opts = {
       backup = true;
@@ -126,6 +132,8 @@
       hlsearch = false;
       #guicursor = "";
       incsearch = true;
+      list = true;
+      listchars = "space:·,tab:→ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨";
       nu = true;
       number = true;
       relativenumber = true;
@@ -171,6 +179,12 @@
       };
       fugitive = {
 	      enable = true;
+      };
+      lazy = {
+        enable = true;
+        plugins = [
+          
+        ];
       };
       lazygit = {
         enable = true;
@@ -228,25 +242,9 @@
           };
         };
       };
-      lz-n = {
-        enable = true;
-        autoLoad = true;
-      };
       neo-tree = {
         enable = true;
       };
-      #nvim-tree = {
-      #  enable = true;
-      #  openOnSetup = true;
-      #  openOnSetupFile = true;
-      #  preferStartupRoot = true;
-      #  respectBufCwd = true;
-      #  syncRootWithCwd = true;
-      #  updateFocusedFile = {
-      #    enable = true;
-      #    updateRoot = true;
-      #  };
-      #};
       packer.enable = true;
       telescope = {
         enable = true;
@@ -328,15 +326,6 @@
       trouble.enable = true;
       toggleterm = {
         enable = true;
-        lazyLoad = {
-          settings = {
-            cmd = "ToggleTerm";
-            keys = [
-              "<leader>tg"
-              "<leader>gg"
-            ];
-          };
-        };
       };
       undotree = {
 	      enable = true;
