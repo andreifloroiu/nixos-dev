@@ -15,9 +15,9 @@
         command = "setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab";
       }
     ];
-    #colorschemes.catppuccin.enable = true;
+    colorschemes.catppuccin.enable = true;
     #colorschemes.gruvbox.enable = true;
-    colorschemes.onedark.enable = true;
+    #colorschemes.onedark.enable = true;
     #colorschemes.rose-pine.enable = true;
     #colorschemes.tokyonight.enable = true;
     globals = {
@@ -48,7 +48,7 @@
       }
       {
         mode = "n";
-        action = ":NvimTreeToggle<CR>";
+        action = ":Neotree toggle<CR>";
         key = "<leader>e";
         options.silent = true;
       }
@@ -102,8 +102,19 @@
       }
       {
         mode = "n";
-        key = "<leader>f";
         action = "vim.lsp.buf.format";
+        key = "<leader>f";
+        lua = true;
+        options.silent = true;
+      }
+      {
+        mode = "n";
+        action = ''
+        function()
+          require("which-key").show({ global = false })
+        end
+        '';
+        key = "<leader>?";
         lua = true;
         options.silent = true;
       }
@@ -117,6 +128,12 @@
         action = "<cmd>cprev<CR>zz";
         key = "<C-j>";
       }
+      {
+        mode = "n";
+        action = ":set list!<CR>";
+        key = "<leader>w";
+
+      }
     ];
     opts = {
       backup = true;
@@ -126,6 +143,8 @@
       hlsearch = false;
       #guicursor = "";
       incsearch = true;
+      list = true;
+      listchars = "space:·,tab:→ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨";
       nu = true;
       number = true;
       relativenumber = true;
@@ -171,6 +190,15 @@
       };
       fugitive = {
 	      enable = true;
+      };
+      lazy = {
+        enable = true;
+        plugins = [
+          
+        ];
+      };
+      lazygit = {
+        enable = true;
       };
       lsp = {
         enable = true;
@@ -225,18 +253,8 @@
           };
         };
       };
-      lz-n.enable = true;
-      nvim-tree = {
+      neo-tree = {
         enable = true;
-        openOnSetup = true;
-        openOnSetupFile = true;
-        preferStartupRoot = true;
-        respectBufCwd = true;
-        syncRootWithCwd = true;
-        updateFocusedFile = {
-          enable = true;
-          updateRoot = true;
-        };
       };
       packer.enable = true;
       telescope = {
@@ -282,12 +300,12 @@
       transparent.enable = true;
       treesitter = {
 	      enable = true;
-	      settings = {
-	        additional_vim_regex_highlighting = false;
-	        auroinstall = true;
+	      settings = { 
+          additional_vim_regex_highlighting = false;
+          autoinstall = true;
 	        highlight.enable = true;
 	        ensure_installed = [ 
-	          "bash"
+            "bash"
             "c"
             "cpp"
             "c_sharp"
@@ -299,26 +317,26 @@
             "gitignore"
             "html"
             "javascript"
+            "json"
             "lua"
             "markdown"
             "markdown_inline"
             "nix"
+            "python"
+            "query"
+            "regex"
             "rust"
+            "tsx"
             "typescript"
+            "sql"
+            "vim"
+            "yaml"
           ];
 	      };
       };
+      trouble.enable = true;
       toggleterm = {
         enable = true;
-        lazyLoad = {
-          settings = {
-            cmd = "ToggleTerm";
-            keys = [
-              "<leader>tg"
-              "<leader>gg"
-            ];
-          };
-        };
       };
       undotree = {
 	      enable = true;
@@ -326,6 +344,10 @@
       };
       vim-css-color.enable = true;
       web-devicons.enable = true;
+      which-key = { 
+        enable = true;
+        autoLoad = true;
+      };
     };
     extraPackages = with pkgs; [
       cargo

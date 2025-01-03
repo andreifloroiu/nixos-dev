@@ -82,12 +82,17 @@ in {
       set-option -g clock-mode-colour '${colors.dominant}'
 
       # Set hooks for after a session is created
-      set-hook -g session-created "rename-window vi"
+      set-hook -g session-created "rename-window sys"
       set-hook -ag session-created "split-window -h"
+      set-hook -ag session-created "select-pane -L"
+      set-hook -ag session-created "new-window -n vi"
+      set-hook -ag session-created "new-window -n git"
       set-hook -ag session-created "new-window -n run"
       set-hook -ag session-created "split-window -h"
-      set-hook -ag session-created "new-window -n sys"
+      set-hook -ag session-created "select-pane -L"
+      set-hook -ag session-created "new-window -n logs"
       set-hook -ag session-created "split-window -h"
+      set-hook -ag session-created "select-pane -L"
       set-hook -ag session-created "select-window -t :vi"      
    '';
   };

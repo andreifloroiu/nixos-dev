@@ -30,16 +30,39 @@ nix flake update \
     && sudo nixos-rebuild switch --flake .#wsl-aarch64 --show-trace
 ```
 
-## Build WSL Tarball
+## Build WSL
 
-Build into a ```result```, which is just a symlinked directory:
+### Use Ubuntu WSL
+
+Install ```nix``` package manager (single-user):
 
 ```bash
-nix flake update \
-    && nix build .#nixosConfigurations.wsl-aarch64.config.system.build.tarballBuilder \
+sh <(curl -L https://nixos.org/nix/install) --no-daemon
+```
+
+Follow the next instruction from _install script_ then proceed.
+
+Build into a ```result```, which is a symlink:
+
+```bash
+nix build .#nixosConfigurations.wsl-aarch64.config.system.build.tarballBuilder \
         --extra-experimental-features nix-command --extra-experimental-features flakes \
         --out-link result \
     && sudo ./result/bin/nixos-wsl-tarball-builder
+```
+
+Move resulting file to host OS user folder:
+
+```bash
+mkdir  /mnt/c/Users/{{username}}/NixOS
+mv nixos-wsl.tar.gz /mnt/c/Users/{{username}}/NixOS
+```
+
+Change to ```powershell``` on host OS and run:
+
+```powershell
+cd $env:USERPROFILE\NixOS\
+wsl --import NixOS $env:USERPROFILE\NixOS\ nixos-wsl.tar.gz --version 2
 ```
 
 ## Update Versions
