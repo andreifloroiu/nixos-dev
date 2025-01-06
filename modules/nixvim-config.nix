@@ -15,11 +15,19 @@
         command = "setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab";
       }
     ];
-    colorschemes.catppuccin.enable = true;
+    #colorschemes.catppuccin.enable = true;
     #colorschemes.gruvbox.enable = true;
     #colorschemes.onedark.enable = true;
     #colorschemes.rose-pine.enable = true;
     #colorschemes.tokyonight.enable = true;
+    colorschemes = {
+      tokyonight = {
+        enable = true;
+        settings = {
+          style = "night";
+        };
+      };
+    };
     globals = {
       mapleader = " ";
     };
@@ -194,7 +202,6 @@
       lazy = {
         enable = true;
         plugins = [
-          
         ];
       };
       lazygit = {
@@ -364,6 +371,27 @@
       vscode-js-debug
     ];
     extraConfigLua = ''
+      local dap = require('dap')
+
+      dap.adapters.coreclr = {
+        type = 'executable',
+        command = '${pkgs.netcoredbg}/bin/netcoredbg',
+        args = {'--interpreter=vscode'}
+      }
+
+      dap.configurations.cs = {
+        {
+          type = "coreclr",
+          name = "launch - netcoredbg",
+          request = "launch",
+          program = function()
+            return vim.fn.input('Path to dll', vim.fn.getcwd() .. '/bin/Debug/', 'file')
+            end,
+        },
+      }
+
+      print("myvim started...")
+
     '';
   };
 }
