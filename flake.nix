@@ -28,10 +28,10 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./modules/packages-config.nix
-            ./modules/nixvim-config.nix
-            ./modules/tmux-config.nix
-            ./modules/zsh-config.nix
+            ./config/packages-config.nix
+            ./config/nixvim/default.nix
+            ./config/tmux-config.nix
+            ./config/zsh-config.nix
             (./hosts + "/${hostname}.nix")
             home-manager.nixosModules.home-manager
             nixvim.nixosModules.nixvim
