@@ -58,10 +58,11 @@
       nixosConfigurations = {
         # x86_64 configurations
         wsl-x86_64 = mkSystem "x86_64-linux" "wsl";
-        #surface-x86_64 = mkSystem "x86_64-linux" "surface";
+        standalone-x86_64 = mkSystem "x86_64-linux" "standalone";
 
         # aarch64 configurations
         wsl-aarch64 = mkSystem "aarch64-linux" "wsl";
+        standalone-aarch64 = mkSystem "aarch64-linux" "standalone";
       };
     };
 }
