@@ -28,10 +28,10 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./modules/packages-config.nix
-            ./modules/nixvim-config.nix
-            ./modules/tmux-config.nix
-            ./modules/zsh-config.nix
+            ./config/packages-config.nix
+            ./config/nixvim/default.nix
+            ./config/tmux-config.nix
+            ./config/zsh-config.nix
             (./hosts + "/${hostname}.nix")
             home-manager.nixosModules.home-manager
             nixvim.nixosModules.nixvim
@@ -58,10 +58,11 @@
       nixosConfigurations = {
         # x86_64 configurations
         wsl-x86_64 = mkSystem "x86_64-linux" "wsl";
-        #surface-x86_64 = mkSystem "x86_64-linux" "surface";
+        standalone-x86_64 = mkSystem "x86_64-linux" "standalone";
 
         # aarch64 configurations
         wsl-aarch64 = mkSystem "aarch64-linux" "wsl";
+        standalone-aarch64 = mkSystem "aarch64-linux" "standalone";
       };
     };
 }

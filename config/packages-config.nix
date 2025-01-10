@@ -46,6 +46,7 @@
     mc
     neofetch
     neovim
+    openssl
     pandoc
     pdftk
     python3
