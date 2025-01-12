@@ -29,6 +29,7 @@
       node20 = "nix shell nixpkgs#nodejs_20";
       node18 = "nix shell nixpkgs#nodejs_18";
       myvim = "nvim .";
+      shhh = "sudo shutdown now";
     };
   };
 }
