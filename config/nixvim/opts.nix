@@ -5,7 +5,7 @@
     cursorline = true;
     expandtab = true;
     hlsearch = false;
-    guicursor = "";
+    #guicursor = "";
     incsearch = true;
     list = true;
     listchars = "space:·,tab:→ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨";

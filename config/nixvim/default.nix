@@ -1,6 +1,4 @@
-{ lib, pkgs, ... }:
-
-{
+{ lib, pkgs, ... }: {
   imports = [
     ./colorschemes.nix
     ./globals.nix
@@ -22,8 +20,6 @@
         command = "setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab";
       }
     ];
-    plugins = {
-          };
     extraPackages = with pkgs; [
       cargo
       dotnet-sdk

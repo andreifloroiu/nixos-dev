@@ -6,15 +6,10 @@
       key = "<C-c>";
     }
     {
-      mode = "";
+      mode = "n";
       action = "<nop>";
       key = "<Space>";
       options.silent = true;
-    }
-    {
-      mode = "n";
-      action = "<nop>";
-      key = "Q";
     }
     {
       mode = "n";
