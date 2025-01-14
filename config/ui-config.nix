@@ -6,15 +6,12 @@
   environment.systemPackages = with pkgs; [
     alacritty
     chromium
-    curl
     freerdp
     git
     google-chrome
     lshw
-    neovim
     remmina
     tmux
-    vim
     vscode
     wget
   ];
