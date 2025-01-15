@@ -7,9 +7,8 @@
     alacritty
     chromium
     freerdp
-    git
     google-chrome
-    lshw
+    pandoc
     remmina
     tmux
     vscode
