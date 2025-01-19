@@ -26,6 +26,12 @@
       enable = true;
       filesystem = {
         useLibuvFileWatcher = true;
+        filteredItems = {
+          visible = true;
+          hideDotfiles = false;
+          hideGitignored = true;
+          hideHidden = true;
+        };
       };
     };
     packer.enable = true;
