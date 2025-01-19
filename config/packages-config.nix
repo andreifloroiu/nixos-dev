@@ -88,6 +88,8 @@
     ripgrep
     # delta file sync
     rsync
+    # something I need
+    seq-cli
     # Spotify player TUI
     spotify-player
     # A super file explorer
