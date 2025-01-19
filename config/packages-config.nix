@@ -77,6 +77,8 @@
     mc
     # Cool distro display
     neofetch
+    # HTTP load generator
+    oha
     # For certificates
     openssl
     pdftk
@@ -86,6 +88,10 @@
     ripgrep
     # delta file sync
     rsync
+    # Spotify player TUI
+    spotify-player
+    # A super file explorer
+    superfile
     # tldr any command instead of man, e.g. tldr fd
     tldr
     # To complete a shell, ya need tmux
