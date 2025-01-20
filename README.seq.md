@@ -38,11 +38,11 @@ PH=$(echo '123' | docker run --rm -i datalust/seq config hash) \
   datalust/seq
 ```
 
-### Periodically Ingestion
+### Periodical Ingestion
 
 Periodically run ```sql-cli``` in order to ingest ```json``` logs:
 
 ```bash
-seqcli ingest -i /mnt/d/logs/*.log -s http://localhost:5341 -a 123 --json
+seqcli ingest -i '/mnt/d/logs/*.log' -s http://localhost:5341 -a 123 --json
 ```
 
