@@ -16,9 +16,11 @@
     };
     servers = {
       clangd.enable = true;
+      csharp_ls.enable = true;
       dockerls.enable = true;
       eslint.enable = true;
       html.enable = true;
+      htmx.enable = true;
       nil_ls = {
         enable = true;
         settings = {
@@ -34,11 +36,6 @@
           analyzeOpenDocumentsOnly = false;
           enableSemanticHighlighting = true;
         };
-      };
-      rust_analyzer = {
-        enable = true;
-        installCargo = true;
-        installRustc = true;
       };
       ts_ls.enable = true;
     };
