@@ -6,6 +6,7 @@
     bufremove = { };
     comment = { };
     completion = { };
+    cursorword = { };
     doc = { };
     extra = { };
     fuzzy = { };

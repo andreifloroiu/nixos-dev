@@ -6,17 +6,16 @@
         dap-ui.enable = true;
       };
     };
-    neo-tree = {
+    nvim-tree = {
       enable = true;
-      filesystem = {
-        useLibuvFileWatcher = true;
-        filteredItems = {
-          visible = true;
-          hideDotfiles = false;
-          hideGitignored = true;
-          hideHidden = true;
-        };
-      };
+      autoClose = false;
+      autoReloadOnWrite = true;
+      disableNetrw = false;
+      hijackCursor = false;
+      hijackNetrw = true;
+      hijackUnnamedBufferWhenOpening = true;
+      ignoreBufferOnSetup = false;
+      openOnSetup = true;
     };
     trouble.enable = true;
     undotree = {
