@@ -21,7 +21,10 @@
       mode = "n";
       action = ":UndotreeToggle<CR>";
       key = "<leader>u";
-      options.silent = true;
+      options = {
+        desc = "Undotree Toggle";
+        silent = true;
+      };
     }
     {
       mode = "n";
@@ -93,7 +96,6 @@
       mode = "n";
       action = ":set list!<CR>";
       key = "<leader>n";
-
     }
   ];
 }

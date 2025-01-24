@@ -5,7 +5,6 @@
     bracketed = { };
     bufremove = { };
     comment = { };
-    completion = { };
     cursorword = { };
     doc = { };
     extra = { };
