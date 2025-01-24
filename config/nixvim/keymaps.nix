@@ -75,7 +75,7 @@
     }
     {
       mode = "n";
-      action = "<cmd>Neotree toggle<cr>";
+      action = "<cmd>NvimTreeToggle<cr>";
       key = "<leader>e";
       options.silent = true;
     }
@@ -95,5 +95,5 @@
       key = "<leader>n";
 
     }
-  ]; 
+  ];
 }
