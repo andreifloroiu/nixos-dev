@@ -16,6 +16,5 @@
           end,
       },
     }
-    print("myvim started...")
   '';
 }

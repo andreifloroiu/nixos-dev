@@ -19,26 +19,17 @@
     }
     {
       mode = "n";
-      action = ":Neotree toggle<CR>";
-      key = "<leader>e";
-      options.silent = true;
-    }
-    {
-      mode = "n";
       action = ":UndotreeToggle<CR>";
       key = "<leader>u";
-      options.silent = true;
+      options = {
+        desc = "Undotree Toggle";
+        silent = true;
+      };
     }
     {
       mode = "n";
       action = ":Git<CR>";
       key = "<leader>gs";
-      options.silent = true;
-    }
-    {
-      mode = "n";
-      action = ":ToggleTerm<CR>";
-      key = "<leader>tg";
       options.silent = true;
     }
     {
@@ -80,13 +71,15 @@
     }
     {
       mode = "n";
-      action = ''
-        function()
-        require("which-key").show({ global = false })
-        end
-        '';
-      key = "<leader>?";
+      action = "MiniFiles.open";
+      key = "<leader>w";
       lua = true;
+      options.silent = true;
+    }
+    {
+      mode = "n";
+      action = "<cmd>NvimTreeToggle<cr>";
+      key = "<leader>e";
       options.silent = true;
     }
     {
@@ -102,8 +95,7 @@
     {
       mode = "n";
       action = ":set list!<CR>";
-      key = "<leader>w";
-
+      key = "<leader>n";
     }
-  ]; 
+  ];
 }

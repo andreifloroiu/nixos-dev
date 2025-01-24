@@ -5,7 +5,9 @@
     ./keymaps.nix
     ./lua.nix
     ./opts.nix
-  ] ++ (lib.filesystem.listFilesRecursive ./plugins);
+  ]
+  ++ (lib.filesystem.listFilesRecursive ./plugins)
+  ++ (lib.filesystem.listFilesRecursive ./mini);
   programs.nixvim = {
     enable = true;
     autoCmd = [
@@ -21,7 +23,6 @@
       }
     ];
     extraPackages = with pkgs; [
-      cargo
       dotnet-sdk
       gcc
       netcoredbg
@@ -29,8 +30,6 @@
       nodejs
       nodePackages.prettier
       nodePackages.vscode-langservers-extracted
-      rust-analyzer
-      rustc
       omnisharp-roslyn
       vscode-js-debug
     ];
