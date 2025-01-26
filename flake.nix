@@ -46,7 +46,7 @@
               ];
             })
           ];
-          specialArgs = { 
+          specialArgs = {
             inherit inputs system;
             pkgs-stable = import nixpkgs-stable {
               inherit system;

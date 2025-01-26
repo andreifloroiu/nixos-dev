@@ -1,5 +1,5 @@
 { ... }: {
-  programs.nixvim.plugins.mini.modules.completion = {
-
-  };
+#   programs.nixvim.plugins.mini.modules.completion = {
+#
+#   };
 }

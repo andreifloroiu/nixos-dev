@@ -1,15 +1,17 @@
 { ... }: {
   programs.nixvim.plugins.treesitter = {
     enable = true;
-    settings = { 
+    settings = {
       additional_vim_regex_highlighting = false;
       autoinstall = true;
       highlight.enable = true;
-      ensure_installed = [ 
+      ensure_installed = [
         "bash"
         "c"
-        "cpp"
         "c_sharp"
+        "cpp"
+        "css"
+        "csv"
         "dockerfile"
         "git_config"
         "git_rebase"
@@ -19,19 +21,26 @@
         "html"
         "javascript"
         "json"
+        "json5"
         "lua"
         "markdown"
         "markdown_inline"
+        "mermaid"
         "nix"
+        "ql"
         "python"
         "query"
         "regex"
         "rust"
+        "sql"
+        "ssh_config"
+        "tmux"
         "tsx"
         "typescript"
-        "sql"
         "vim"
+        "vimdoc"
         "yaml"
+        "zig"
         ];
     };
   };
