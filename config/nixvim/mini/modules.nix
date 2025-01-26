@@ -18,7 +18,7 @@
     move = { };
     notify = { };
     operators = { };
-    pairs = { };
+    # pairs = { };
     pick = { };
     snippets = { };
     splitjoin = { };

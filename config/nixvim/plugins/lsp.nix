@@ -16,7 +16,7 @@
     };
     servers = {
       clangd.enable = true;
-      csharp_ls.enable = true;
+      #csharp_ls.enable = true;
       dockerls.enable = true;
       eslint.enable = true;
       html.enable = true;
@@ -27,14 +27,24 @@
           autoArchive = true;
         };
       };
+      lua-ls.enable = true;
       omnisharp = {
         enable = true;
         settings = {
-          enableImportCompletion = true;
-          enableMsBuildLoadProjectsOnDemand = true;
-          enableRoslynAnalyzers = true;
-          analyzeOpenDocumentsOnly = false;
-          enableSemanticHighlighting = true;
+          FormattingOptions = {
+            EnableEditorConfigSupport = true;
+            OrganizImports = true;
+          };
+          RoslynExtensionsOptions = {
+            EnableAnalyzersSupport = true;
+            EnableImportCompletion = true;
+            AnalyzeOpenDocumentsOnly = false;
+          };
+          Sdk = {
+            IncludePrereleases = true;
+          };
+          EnableRoslynAnalyzers = true;
+          EnableSemanticHighlighting = true;
         };
       };
       ts_ls.enable = true;
