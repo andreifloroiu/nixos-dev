@@ -22,7 +22,11 @@
     "dotnet-sdk-6.0.428"
   ];
 
-  # Some packages were inspired from here 
+  fonts.packages = [
+    pkgs.nerd-fonts.droid-sans-mono
+  ];
+
+  # Some packages were inspired from here
   # https://itnext.io/essential-cli-tui-tools-for-developers-7e78f0cd27db
   environment.systemPackages = with pkgs; [
     # Grep for something else
@@ -77,6 +81,8 @@
     mc
     # Cool distro display
     neofetch
+    # The new shell
+    nushell
     # HTTP load generator
     oha
     # For certificates

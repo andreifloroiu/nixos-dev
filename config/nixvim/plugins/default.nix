@@ -2,10 +2,8 @@
   programs.nixvim.plugins = {
     dap = {
       enable = true;
-      extensions = {
-        dap-ui.enable = true;
-      };
     };
+    dap-ui.enable = true;
     nvim-tree = {
       enable = true;
       autoClose = false;
