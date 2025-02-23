@@ -27,7 +27,7 @@
           autoArchive = true;
         };
       };
-      lua-ls.enable = true;
+      lua_ls.enable = true;
       omnisharp = {
         enable = true;
         settings = {

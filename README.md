@@ -48,7 +48,10 @@ Build into a ```result```, which is a symlink:
 nix build .#nixosConfigurations.wsl-aarch64.config.system.build.tarballBuilder \
         --extra-experimental-features nix-command --extra-experimental-features flakes \
         --out-link result \
-    && sudo ./result/bin/nixos-wsl-tarball-builder
+    && echo "Running result..." \
+    && sudo ./result/bin/nixos-wsl-tarball-builder \
+    && sudo mv nixos.wsl nixos-wsl.tar.gz \
+    && sudo chown andrei:users nixos-wsl.tar.gz
 ```
 
 Move resulting file to host OS user folder:
