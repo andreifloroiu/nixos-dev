@@ -30,7 +30,8 @@ jobs:
             --extra-experimental-features nix-command \
             --extra-experimental-features flakes \
             --out-link result-${{ matrix.arch }} \
-          && sudo ./result-${{ matrix.arch }}/bin/nixos-wsl-tarball-builder
+            && sudo ./result-${{ matrix.arch }}/bin/nixos-wsl-tarball-builder \
+            && sudo mv nixos.wsl nixos-${{ matrix.arch }}-wsl.tar.gz
 
       - name: Upload Tarball
         uses: actions/upload-artifact@v3
