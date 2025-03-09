@@ -26,6 +26,10 @@
     pkgs.nerd-fonts.droid-sans-mono
   ];
 
+  networking = {
+    enableIPv6 = true;
+  };
+
   # Some packages were inspired from here
   # https://itnext.io/essential-cli-tui-tools-for-developers-7e78f0cd27db
   environment.systemPackages = with pkgs; [
