@@ -2,4 +2,7 @@
   users = {
     defaultUserShell = pkgs.zsh;
   };
+  environment.systemPackages = with pkgs; [
+    sshd
+  ];
 }

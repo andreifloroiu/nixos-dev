@@ -119,9 +119,8 @@
     # An incomplete shell (needs a multiplexer)
     zsh
   ];
-
   environment.sessionVariables = {
     DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_8_0}";
     MC_SKIN = "dark";
   };
-}
+ }

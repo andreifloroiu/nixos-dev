@@ -36,11 +36,16 @@ nix flake update \
 
 ### __x86_64__
 
+Under ```root```.
+
 ```bash
+nix profile install "flake:home-manager#home-manager" --extra-experimental-features nix-command --extra-experimental-features flakes
 sudo nix build --refresh github:andreifloroiu/nixos-dev#nixConfigurations.admin-x86_64 --extra-experimental-features nix-command --extra-experimental-features flakes
 ```
 
 ### __ARM64__
+
+Under ```root```.
 
 ```bash
 sudo nix build --refresh github:andreifloroiu/nixos-dev#nixConfigurations.admin-aarch64 --extra-experimental-features nix-command --extra-experimental-features flakes

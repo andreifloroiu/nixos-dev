@@ -4,10 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,12 +18,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nixvim, nixos-wsl, vscode-server, ... }@inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nixvim, nixos-wsl, vscode-server, ... }@inputs:
     let
+      systemAarch64 = "aarch64-linux";
+      systemX86_64 = "x86_64-linux";
       mkSystem = system: hostname:
-        let
-          tracedSystem  = builtins.trace system system;
-        in
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
@@ -36,7 +31,6 @@
             ./config/tmux-config.nix
             ./config/zsh-config.nix
             (./hosts + "/${hostname}.nix")
-            home-manager.nixosModules.home-manager
             nixvim.nixosModules.nixvim
             ({ pkgs, ... }: {
               environment.systemPackages = with pkgs; [
@@ -60,14 +54,13 @@
     in {
       nixosConfigurations = {
         # x86_64 configurations
-        wsl-x86_64 = mkSystem "x86_64-linux" "wsl";
-        standalone-x86_64 = mkSystem "x86_64-linux" "standalone";
-        admin-x86_64 = mkSystem "x86_64-linux" "admin";
-
+        "wsl-x86_64" = mkSystem systemX86_64 "wsl";
+        "standalone-x86_64" = mkSystem systemX86_64 "standalone";
+        "admin-x86_64" = mkSystem systemX86_64 "admin";
         # aarch64 configurations
-        wsl-aarch64 = mkSystem "aarch64-linux" "wsl";
-        standalone-aarch64 = mkSystem "aarch64-linux" "standalone";
-        admin-aarch64 = mkSystem "aarch64-linux" "admin";
+        "wsl-aarch64" = mkSystem systemAarch64 "wsl";
+        "standalone-aarch64" = mkSystem systemAarch64 "standalone";
+        "admin-aarch64" = mkSystem systemAarch64 "admin";
       };
-    };
+   };
 }
