@@ -2,7 +2,7 @@
 
 {
   imports = [
-    "../modules/ui-config.nix"
+    "../config/ui-config.nix"
   ];
   networking.hostName = "nixos-standalone"; # Define your hostname.
 }

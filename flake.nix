@@ -25,6 +25,9 @@
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, nixvim, nixos-wsl, vscode-server, ... }@inputs:
     let
       mkSystem = system: hostname:
+        let
+          tracedSystem  = builtins.trace system system;
+        in
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
@@ -59,10 +62,12 @@
         # x86_64 configurations
         wsl-x86_64 = mkSystem "x86_64-linux" "wsl";
         standalone-x86_64 = mkSystem "x86_64-linux" "standalone";
+        admin-x86_64 = mkSystem "x86_64-linux" "admin";
 
         # aarch64 configurations
         wsl-aarch64 = mkSystem "aarch64-linux" "wsl";
         standalone-aarch64 = mkSystem "aarch64-linux" "standalone";
+        admin-aarch64 = mkSystem "aarch64-linux" "admin";
       };
     };
 }
