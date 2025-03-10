@@ -2,12 +2,13 @@
 
 [My NixOS development flake](https://nixos.wiki/wiki/flakes) with configuration files for different hosts.
 
-## Apply to Current System
+## Apply to Current NixOS System
 
 ### __x86_64__
 
 ```bash
 sudo nixos-rebuild switch --flake .#wsl-x86_64 --show-trace
+sudo nixos-rebuild switch --flake github:andreifloroiu/nixos-dev#wsl-x86_64
 ```
 
 Bump version up and rebuild:
@@ -21,6 +22,7 @@ nix flake update \
 
 ```bash
 sudo nixos-rebuild switch --flake .#wsl-aarch64 --show-trace
+sudo nixos-rebuild switch --flake github:andreifloroiu/nixos-dev#wsl-aarch64
 ```
 
 Bump version up and rebuild:
@@ -28,6 +30,25 @@ Bump version up and rebuild:
 ```bash
 nix flake update \
     && sudo nixos-rebuild switch --flake .#wsl-aarch64 --show-trace
+```
+
+## Apply to Other Distro
+
+### __x86_64__
+
+Under ```root```.
+
+```bash
+nix profile install "flake:home-manager#home-manager" --extra-experimental-features nix-command --extra-experimental-features flakes
+sudo nix build --refresh github:andreifloroiu/nixos-dev#nixConfigurations.admin-x86_64 --extra-experimental-features nix-command --extra-experimental-features flakes
+```
+
+### __ARM64__
+
+Under ```root```.
+
+```bash
+sudo nix build --refresh github:andreifloroiu/nixos-dev#nixConfigurations.admin-aarch64 --extra-experimental-features nix-command --extra-experimental-features flakes
 ```
 
 ## Build WSL

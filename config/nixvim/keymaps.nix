@@ -97,5 +97,11 @@
       action = ":set list!<CR>";
       key = "<leader>n";
     }
+    {
+      mode = "n";
+      action = "0v$y";
+      key = "<leader>l";
+      options.desc = "Copy current line";
+    }
   ];
 }
