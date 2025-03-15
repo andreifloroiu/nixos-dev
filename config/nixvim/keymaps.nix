@@ -1,4 +1,14 @@
 { ... }: {
+
+  #
+  # cmp (autocomplete) keymaps are in cmp.nix and it would like bellow
+  #
+  # "<C-p>" = "cmp.mapping.select_prev_item(cmp_select)";
+  # "<C-n>" = "cmp.mapping.select_next_item(cmp_select)";
+  # "<C-y>" = "cmp.mapping.confirm({ select = true })";
+  # "<C-f>" = "cmp.mapping.complete()";
+  # "<CR>" = "cmp.mapping.confirm({ select = true })";
+
   programs.nixvim.keymaps = [
     {
       mode = "i";
@@ -96,6 +106,7 @@
       mode = "n";
       action = ":set list!<CR>";
       key = "<leader>n";
+      options.desc = "Toggle display of white spaces";
     }
     {
       mode = "n";
