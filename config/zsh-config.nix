@@ -9,7 +9,7 @@
     syntaxHighlighting.enable = true;
     ohMyZsh = {
       enable = true;
-      plugins = [ 
+      plugins = [
       	"git"
         "sudo"
         "systemadmin"
@@ -26,8 +26,9 @@
     shellAliases = {
       la = "eza -lh";
       node22 = "nix shell nixpkgs#nodejs_22";
-      node20 = "nix shell nixpkgs#nodejs_20";
-      node18 = "nix shell nixpkgs#nodejs_18";
+      #node20 = "nix shell nixpkgs#nodejs_20";
+      #node18 = "nix shell nixpkgs#nodejs_18";
+      mymux = "tmux";
       myvim = "nvim .";
       shhh = "sudo shutdown now";
     };

@@ -42,3 +42,4 @@ luac.out
 # vim backup files
 *~
 
+.env

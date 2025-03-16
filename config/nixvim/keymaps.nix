@@ -23,6 +23,12 @@
     }
     {
       mode = "n";
+      action = ":bdelete<CR>";
+      key = "<leader>q";
+      options.desc = "Closes current buffere (:bdelete)";
+    }
+    {
+      mode = "n";
       action = ":Ex<CR>";
       key = "<leader>pv";
       options.silent = true;

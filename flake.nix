@@ -25,24 +25,36 @@
       mkSystem = system: hostname:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [
-            ./config/packages-config.nix
-            ./config/nixvim/default.nix
-            ./config/tmux-config.nix
-            ./config/zsh-config.nix
-            (./hosts + "/${hostname}.nix")
-            nixvim.nixosModules.nixvim
-            ({ pkgs, ... }: {
-              environment.systemPackages = with pkgs; [
-                nodejs_22
-                nodejs_20
-                nodejs_18
-                yarn
-                nodePackages.node-gyp
-                nodePackages.node-gyp-build
-              ];
-            })
-          ];
+          modules = let
+            baseModules = [
+              nixvim.nixosModules.nixvim
+              ./config/nixvim/default.nix
+              ./config/packages-common-config.nix
+              ./config/tmux-config.nix
+              ./config/zsh-config.nix
+              (./hosts + "/${hostname}.nix")
+            ];
+            devModules = if hostname == "dev" || hostname == "wsl" then [
+              ./config/packages-config.nix
+              ./config/packages-dev-config.nix
+              ({ pkgs, ... }: {
+                 environment.systemPackages = with pkgs; [
+                    nodejs_22
+                    #nodejs_20
+                    #nodejs_18
+                    yarn
+                    nodePackages.node-gyp
+                    nodePackages.node-gyp-build
+                 ];
+               })
+            ] else [];
+            serverModules = if hostname == "jump" || hostname == "server" then [
+              ./config/packages-jump-config.nix
+              ./config/packages-server-config.nix
+            ] else [];
+          in
+            baseModules ++ devModules ++ serverModules;
+
           specialArgs = {
             inherit inputs system;
             pkgs-stable = import nixpkgs-stable {
@@ -54,13 +66,15 @@
     in {
       nixosConfigurations = {
         # x86_64 configurations
+        "dev-x86_64" = mkSystem systemX86_64 "dev";
         "wsl-x86_64" = mkSystem systemX86_64 "wsl";
-        "standalone-x86_64" = mkSystem systemX86_64 "standalone";
-        "admin-x86_64" = mkSystem systemX86_64 "admin";
+        "jump-x86_64" = mkSystem systemX86_64 "jump";
+        "server-x86_64" = mkSystem systemX86_64 "server";
         # aarch64 configurations
+        "dev-aarch64" = mkSystem systemAarch64 "dev";
         "wsl-aarch64" = mkSystem systemAarch64 "wsl";
-        "standalone-aarch64" = mkSystem systemAarch64 "standalone";
-        "admin-aarch64" = mkSystem systemAarch64 "admin";
+        "jump-aarch64" = mkSystem systemAarch64 "jump";
+        "server-aarch64" = mkSystem systemAarch64 "server";
       };
    };
 }
