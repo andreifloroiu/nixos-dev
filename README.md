@@ -11,13 +11,6 @@ sudo nixos-rebuild switch --flake .#wsl-x86_64 --show-trace
 sudo nixos-rebuild switch --flake github:andreifloroiu/nixos-dev#wsl-x86_64
 ```
 
-Bump version up and rebuild:
-
-```bash
-nix flake update \
-    && sudo nixos-rebuild switch --flake .#wsl-x86_64 --show-trace
-```
-
 ### __ARM64__
 
 ```bash
@@ -32,26 +25,7 @@ nix flake update \
     && sudo nixos-rebuild switch --flake .#wsl-aarch64 --show-trace
 ```
 
-## Apply to Other Distro
-
-### __x86_64__
-
-Under ```root```.
-
-```bash
-nix profile install "flake:home-manager#home-manager" --extra-experimental-features nix-command --extra-experimental-features flakes
-sudo nix build --refresh github:andreifloroiu/nixos-dev#nixConfigurations.admin-x86_64 --extra-experimental-features nix-command --extra-experimental-features flakes
-```
-
-### __ARM64__
-
-Under ```root```.
-
-```bash
-sudo nix build --refresh github:andreifloroiu/nixos-dev#nixConfigurations.admin-aarch64 --extra-experimental-features nix-command --extra-experimental-features flakes
-```
-
-## Build WSL
+## Build for WSL
 
 ### Use Ubuntu WSL
 
@@ -88,6 +62,16 @@ Change to ```powershell``` on host OS and run:
 cd $env:USERPROFILE\NixOS\
 wsl --import NixOS $env:USERPROFILE\NixOS\ nixos-wsl.tar.gz --version 2
 ```
+
+## Build for Server
+
+1. Clone this repo [andreifloroiu/nixos-dev](https://github.com/andreifloroiu/nixos-dev).
+
+2. ```cd``` into it
+
+3. Build an ```sd-image``` for target, e.g. 
+    ```nix build '.#nixosConfigurations.jump-x86_64.config.system.build.sd-image'```
+    or ```nix build '.#nixosConfigurations.jump-aarch64.config.system.build.sd-image'```
 
 ## Update Versions
 

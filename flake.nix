@@ -2,6 +2,7 @@
   description = "Andrei Floroiu DEV NixOS configuration";
 
   inputs = {
+    # Other flakes
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
     nixvim = {
@@ -48,8 +49,7 @@
                  ];
                })
             ] else [];
-            serverModules = if hostname == "jump" || hostname == "server" then [
-              ./config/packages-jump-config.nix
+            serverModules = if hostname == "jump" || hostname == "web" then [
               ./config/packages-server-config.nix
             ] else [];
           in
@@ -69,12 +69,12 @@
         "dev-x86_64" = mkSystem systemX86_64 "dev";
         "wsl-x86_64" = mkSystem systemX86_64 "wsl";
         "jump-x86_64" = mkSystem systemX86_64 "jump";
-        "server-x86_64" = mkSystem systemX86_64 "server";
+        "web-x86_64" = mkSystem systemX86_64 "web";
         # aarch64 configurations
         "dev-aarch64" = mkSystem systemAarch64 "dev";
         "wsl-aarch64" = mkSystem systemAarch64 "wsl";
         "jump-aarch64" = mkSystem systemAarch64 "jump";
-        "server-aarch64" = mkSystem systemAarch64 "server";
+        "web-aarch64" = mkSystem systemAarch64 "web";
       };
    };
 }
