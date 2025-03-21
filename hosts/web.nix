@@ -11,4 +11,5 @@
       ./.env/secrets/ssh-keys/andrei.pub
     ];
   };
+  system.stateVersion = "24.11";
 }

@@ -21,5 +21,5 @@
   services.vscode-server.enable = true;
 
   # Get latest from here https://github.com/nix-community/NixOS-WSL/releases
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }
