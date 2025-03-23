@@ -14,5 +14,7 @@
     seq-cli
     # Spotify player TUI
     spotify-player
+    # Vault CLI
+    vault
   ];
 }
