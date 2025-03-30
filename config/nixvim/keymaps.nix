@@ -29,7 +29,7 @@
     }
     {
       mode = "n";
-      action = ":bdelete<CR>[b";
+      action = "<cmd>bdelete<bar>b#<CR>";
       key = "<leader>q";
       options = {
         desc = "Closes current buffere (:bdelete)";
@@ -147,6 +147,12 @@
       action = "0v$y";
       key = "<leader>l";
       options.desc = "Copy current line";
+    }
+    {
+      mode = "n";
+      key = "<leader>b";
+      action = "<cmd>b#<cr>";
+      options.desc = "Previous buffer";
     }
   ];
 }
