@@ -35,6 +35,7 @@
       myvim = "nvim .";
       mn = "myvim";
       shhh = "sudo shutdown now";
+      tk = "tmux kill-session";
     };
   };
 }
