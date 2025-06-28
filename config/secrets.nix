@@ -2,7 +2,7 @@
 
 {
   services.openssh.authorizedKeys.keys = [
-    builtins.readFile ../.env/secrets/public-keys/hq-ssh-ca.pub
+    builtins.readFile ../.env/secrets/ssh-keys/hq.pub
   ];
   security.pki.trustedSystemCertificates = [
     pkgs.writeTextFile {
