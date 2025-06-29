@@ -1,7 +1,10 @@
 { pkgs, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -40,6 +43,8 @@
     curl
     # Analyze docker image layers
     dive
+    # Disk utility
+    duf
     # Tree list occupied space
     dust
     # Better ls
@@ -58,6 +63,8 @@
     lshw
     # A commander because I was raised in the '90s
     mc
+    # Another disk utility
+    ncdu
     # Cool distro display
     neofetch
     # The new shell
