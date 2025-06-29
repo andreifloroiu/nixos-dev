@@ -5,7 +5,7 @@
 # - https://github.com/morhetz/gruvbox
 # - https://github.com/morhetz/gruvbox-contrib
 
-{ config, lib, ... }:
+{ lib, ... }:
 
 with lib;
 

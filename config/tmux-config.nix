@@ -12,7 +12,7 @@ let
   '';
 in {
 
-  imports = [ ./theme-config.nix ];
+  imports = [ ./tmux-theme-config.nix ];
 
   programs.tmux = {
     enable = true;
@@ -94,7 +94,7 @@ in {
       set-hook -ag session-created "new-window -n logs"
       set-hook -ag session-created "split-window -h"
       set-hook -ag session-created "select-pane -L"
-      set-hook -ag session-created "select-window -t :vi"      
+      set-hook -ag session-created "select-window -t :vi"
    '';
   };
 }
