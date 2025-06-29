@@ -19,51 +19,76 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nixvim, nixos-wsl, vscode-server, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-stable,
+      nixvim,
+      nixos-wsl,
+      vscode-server,
+      ...
+    }@inputs:
     let
       systemAarch64 = "aarch64-linux";
       systemX86_64 = "x86_64-linux";
-      mkSystem = system: hostname:
+      mkSystem =
+        system: hostname:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = let
-            baseModules = [
-              nixvim.nixosModules.nixvim
-              ./config/nixvim/default.nix
-              ./config/packages-common-config.nix
-              ./config/tmux-config.nix
-              ./config/zsh-config.nix
-              (./hosts + "/${hostname}.nix")
-            ];
-            devModules = if hostname == "dev" || hostname == "wsl" then [
-              ./config/packages-config.nix
-              ./config/packages-dev-config.nix
-              ({ pkgs, ... }: {
-                 environment.systemPackages = with pkgs; [
-                    nodejs_22
-                    #nodejs_20
-                    #nodejs_18
-                    yarn
-                    nodePackages.node-gyp
-                    nodePackages.node-gyp-build
-                 ];
-               })
-            ] else [];
-            serverModules = if hostname == "jump" || hostname == "web" then [
-              ./config/packages-server-config.nix
-            ] else [];
-          in
+          modules =
+            let
+              baseModules = [
+                nixvim.nixosModules.nixvim
+                ./config/nixvim/default.nix
+                ./config/packages-common-config.nix
+                ./config/tmux-config.nix
+                ./config/zsh-config.nix
+                ./secrets/certs.nix
+                (./hosts + "/${hostname}.nix")
+              ];
+              devModules =
+                if hostname == "dev" || hostname == "wsl" then
+                  [
+                    ./config/packages-config.nix
+                    ./config/packages-dev-config.nix
+                    (
+                      { pkgs, ... }:
+                      {
+                        environment.systemPackages = with pkgs; [
+                          nodejs_22
+                          #nodejs_20
+                          #nodejs_18
+                          yarn
+                          nodePackages.node-gyp
+                          nodePackages.node-gyp-build
+                        ];
+                      }
+                    )
+                  ]
+                else
+                  [ ];
+              serverModules =
+                if hostname == "jump" || hostname == "web" then
+                  [
+                    ./config/packages-server-config.nix
+                  ]
+                else
+                  [ ];
+            in
             baseModules ++ devModules ++ serverModules;
 
           specialArgs = {
             inherit inputs system;
+            flake = self;
             pkgs-stable = import nixpkgs-stable {
               inherit system;
               config.allowUnfree = true;
             };
           };
         };
-    in {
+    in
+    {
       nixosConfigurations = {
         # x86_64 configurations
         "dev-x86_64" = mkSystem systemX86_64 "dev";
@@ -76,5 +101,5 @@
         "jump-aarch64" = mkSystem systemAarch64 "jump";
         "web-aarch64" = mkSystem systemAarch64 "web";
       };
-   };
+    };
 }
