@@ -44,7 +44,6 @@
                 ./config/packages-common-config.nix
                 ./config/tmux-config.nix
                 ./config/zsh-config.nix
-                ./secrets/certs.nix
                 (./hosts + "/${hostname}.nix")
               ];
               devModules =
