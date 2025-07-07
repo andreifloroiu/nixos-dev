@@ -32,6 +32,12 @@ Perform a cleanup from time to time:
 sudo nix-collect-garbage -d
 ```
 
+## Rollback
+
+```sh
+sudo nixos-rebuild switch --rollback
+```
+
 ## Build WSL Distro From Scratch
 
 ### Use Ubuntu WSL
