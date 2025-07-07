@@ -9,6 +9,10 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,14 +25,13 @@
 
   outputs =
     {
-      self,
       nixpkgs,
-      nixpkgs-stable,
       nixvim,
+      home-manager,
       nixos-wsl,
       vscode-server,
       ...
-    }@inputs:
+    }:
     let
       systemAarch64 = "aarch64-linux";
       systemX86_64 = "x86_64-linux";
@@ -39,6 +42,7 @@
           modules =
             let
               baseModules = [
+                home-manager.nixosModules.home-manager
                 nixvim.nixosModules.nixvim
                 (./hosts + "/${hostname}.nix")
               ];
@@ -46,6 +50,14 @@
                 if hostname == "dev" || hostname == "wsl" then
                   [
                     ./modules/development.nix
+                  ]
+                else
+                  [ ];
+              wslModules =
+                if hostname == "wsl" then
+                  [
+                    nixos-wsl.nixosModules.default
+                    vscode-server.nixosModules.default
                   ]
                 else
                   [ ];
@@ -57,19 +69,20 @@
                 else
                   [ ];
             in
-            baseModules ++ devModules ++ serverModules;
-
-          specialArgs = {
-            inherit inputs system;
-            flake = self;
-            pkgs-stable = import nixpkgs-stable {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          };
+            baseModules ++ devModules ++ wslModules ++ serverModules;
         };
     in
     {
+      nixosModules = {
+        base = import ./modules/base.nix;
+        desktop = import ./modules/desktop.nix;
+        development = import ./modules/development.nix;
+        server = import ./modules/server.nix;
+        wsl = import ./hosts/wsl.nix ++ [
+          nixos-wsl.nixosModules.default
+          vscode-server.nixosModules.default
+        ];
+      };
       nixosConfigurations = {
         # x86_64 configurations
         "dev-x86_64" = mkSystem systemX86_64 "dev";

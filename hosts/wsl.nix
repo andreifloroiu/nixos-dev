@@ -1,21 +1,13 @@
 {
   lib,
-  pkgs,
-  inputs,
   ...
 }:
-
 {
-  imports = [
-    inputs.nixos-wsl.nixosModules.wsl
-    inputs.vscode-server.nixosModule
-  ];
-
   # Get latest from here https://github.com/nix-community/NixOS-WSL/releases
   system.stateVersion = "24.11";
 
   wsl = {
-    enable = true;
+    enable = lib.mkDefault true;
     defaultUser = lib.mkDefault "andrei";
     docker-desktop = {
       enable = lib.mkDefault true;
