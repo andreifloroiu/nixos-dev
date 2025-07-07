@@ -25,15 +25,13 @@
 
   outputs =
     {
-      self,
       nixpkgs,
-      nixpkgs-stable,
       nixvim,
       home-manager,
       nixos-wsl,
       vscode-server,
       ...
-    }@inputs:
+    }:
     let
       systemAarch64 = "aarch64-linux";
       systemX86_64 = "x86_64-linux";
@@ -44,6 +42,7 @@
           modules =
             let
               baseModules = [
+                home-manager.nixosModules.home-manager
                 nixvim.nixosModules.nixvim
                 (./hosts + "/${hostname}.nix")
               ];
@@ -51,6 +50,14 @@
                 if hostname == "dev" || hostname == "wsl" then
                   [
                     ./modules/development.nix
+                  ]
+                else
+                  [ ];
+              wslModules =
+                if hostname == "wsl" then
+                  [
+                    nixos-wsl.nixosModules.default
+                    vscode-server.nixosModules.default
                   ]
                 else
                   [ ];
@@ -62,25 +69,19 @@
                 else
                   [ ];
             in
-            baseModules ++ devModules ++ serverModules;
-
-          specialArgs = {
-            inherit inputs system;
-            flake = self;
-            pkgs-stable = import nixpkgs-stable {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          };
+            baseModules ++ devModules ++ wslModules ++ serverModules;
         };
     in
     {
-      nixosModukes = {
+      nixosModules = {
         base = import ./modules/base.nix;
         desktop = import ./modules/desktop.nix;
         development = import ./modules/development.nix;
         server = import ./modules/server.nix;
-        wsl = import ./hosts/wsl.nix;
+        wsl = import ./hosts/wsl.nix ++ [
+          nixos-wsl.nixosModules.default
+          vscode-server.nixosModules.default
+        ];
       };
       nixosConfigurations = {
         # x86_64 configurations
