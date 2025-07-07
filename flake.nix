@@ -9,6 +9,10 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +29,7 @@
       nixpkgs,
       nixpkgs-stable,
       nixvim,
+      home-manager,
       nixos-wsl,
       vscode-server,
       ...
@@ -70,6 +75,13 @@
         };
     in
     {
+      nixosModukes = {
+        base = import ./modules/base.nix;
+        desktop = import ./modules/desktop.nix;
+        development = import ./modules/development.nix;
+        server = import ./modules/server.nix;
+        wsl = import ./hosts/wsl.nix;
+      };
       nixosConfigurations = {
         # x86_64 configurations
         "dev-x86_64" = mkSystem systemX86_64 "dev";
