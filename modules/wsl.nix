@@ -1,14 +1,12 @@
 {
-  inputs,
   lib,
   ...
 }:
 {
   imports = [
-    ./base.nix
-    inputs.nixos-wsl.nixosModules.default
-    inputs.vscode-server.nixosModules.default
+    ./development.nix
   ];
+
   # Get latest from here https://github.com/nix-community/NixOS-WSL/releases
   system.stateVersion = "24.11";
 

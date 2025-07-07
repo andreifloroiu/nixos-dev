@@ -2,7 +2,6 @@
   description = "Andrei Floroiu DEV NixOS configuration";
 
   inputs = {
-    # Other flakes
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixvim = {
@@ -58,6 +57,8 @@
                 if hostname == "wsl" then
                   [
                     ./modules/wsl.nix
+                    nixos-wsl.nixosModules.default
+                    vscode-server.nixosModules.default
                   ]
                 else
                   [ ];
@@ -70,24 +71,80 @@
                   [ ];
             in
             baseModules ++ devModules ++ wslModules ++ serverModules;
-          specialArgs = {
-            inherit inputs self;
-          };
         };
     in
     {
       nixosModules = {
-        base = import ./modules/base.nix;
-        desktop = import ./modules/desktop.nix;
-        development = import ./modules/development.nix;
-        server = import ./modules/server.nix;
-        wsl =
-          { ... }:
+        base =
+          {
+            config,
+            pkgs,
+            lib,
+            ...
+          }:
           {
             imports = [
-              (import ./hosts/wsl.nix)
+              home-manager.nixosModules.default
+              nixvim.nixosModules.default
+              ./modules/base.nix
+            ];
+          };
+        desktop =
+          {
+            config,
+            pkgs,
+            lib,
+            ...
+          }:
+          {
+            imports = [
+              home-manager.nixosModules.default
+              nixvim.nixosModules.default
+              ./modules/desktop.nix
+            ];
+          };
+        development =
+          {
+            config,
+            pkgs,
+            lib,
+            ...
+          }:
+          {
+            imports = [
+              home-manager.nixosModules.default
+              nixvim.nixosModules.default
+              ./modules/development.nix
+            ];
+          };
+        server =
+          {
+            config,
+            pkgs,
+            lib,
+            ...
+          }:
+          {
+            imports = [
+              home-manager.nixosModules.default
+              nixvim.nixosModules.default
+              ./modules/server.nix
+            ];
+          };
+        wsl =
+          {
+            config,
+            pkgs,
+            lib,
+            ...
+          }:
+          {
+            imports = [
+              home-manager.nixosModules.default
+              nixvim.nixosModules.default
               nixos-wsl.nixosModules.default
               vscode-server.nixosModules.default
+              ./modules/wsl.nix
             ];
           };
       };
