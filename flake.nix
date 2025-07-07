@@ -29,9 +29,10 @@
       nixvim,
       home-manager,
       nixos-wsl,
+      self,
       vscode-server,
       ...
-    }:
+    }@inputs:
     let
       systemAarch64 = "aarch64-linux";
       systemX86_64 = "x86_64-linux";
@@ -47,7 +48,7 @@
                 (./hosts + "/${hostname}.nix")
               ];
               devModules =
-                if hostname == "dev" || hostname == "wsl" then
+                if hostname == "dev" then
                   [
                     ./modules/development.nix
                   ]
@@ -56,8 +57,7 @@
               wslModules =
                 if hostname == "wsl" then
                   [
-                    nixos-wsl.nixosModules.default
-                    vscode-server.nixosModules.default
+                    ./modules/wsl.nix
                   ]
                 else
                   [ ];
@@ -70,6 +70,9 @@
                   [ ];
             in
             baseModules ++ devModules ++ wslModules ++ serverModules;
+          specialArgs = {
+            inherit inputs self;
+          };
         };
     in
     {
@@ -78,10 +81,15 @@
         desktop = import ./modules/desktop.nix;
         development = import ./modules/development.nix;
         server = import ./modules/server.nix;
-        wsl = import ./hosts/wsl.nix ++ [
-          nixos-wsl.nixosModules.default
-          vscode-server.nixosModules.default
-        ];
+        wsl =
+          { ... }:
+          {
+            imports = [
+              (import ./hosts/wsl.nix)
+              nixos-wsl.nixosModules.default
+              vscode-server.nixosModules.default
+            ];
+          };
       };
       nixosConfigurations = {
         # x86_64 configurations
