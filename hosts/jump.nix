@@ -5,5 +5,5 @@ let
 in
 webConfig
 // {
-  networking.hostName = "jump-aarch64";
+  networking.hostName = "jump";
 }

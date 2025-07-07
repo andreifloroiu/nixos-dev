@@ -1,4 +1,11 @@
-{ ... }: {
+{ ... }:
+{
+  imports = [
+    ./cmp.nix
+    ./lsp.nix
+    ./telescope.nix
+    ./treesitter.nix
+  ];
   programs.nixvim.plugins = {
     dap = {
       enable = true;
@@ -15,7 +22,6 @@
       ignoreBufferOnSetup = false;
       openOnSetup = true;
     };
-    trouble.enable = true;
     undotree = {
       enable = true;
       autoLoad = true;
