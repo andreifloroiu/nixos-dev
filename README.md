@@ -6,32 +6,39 @@
 
 ### __x86_64__
 
-```bash
+```sh
 sudo nixos-rebuild switch --flake .#wsl-x86_64 --show-trace
 sudo nixos-rebuild switch --flake github:andreifloroiu/nixos-dev#wsl-x86_64
 ```
 
 ### __ARM64__
 
-```bash
+```sh
 sudo nixos-rebuild switch --flake .#wsl-aarch64 --show-trace
 sudo nixos-rebuild switch --flake github:andreifloroiu/nixos-dev#wsl-aarch64
 ```
 
-Bump version up and rebuild:
+## Bump Versions
 
-```bash
-nix flake update \
-    && sudo nixos-rebuild switch --flake .#wsl-aarch64 --show-trace
+```sh
+nix flake update
 ```
 
-## Build for WSL
+## Garbage Collection
+
+Perform a cleanup from time to time:
+
+```sh
+sudo nix-collect-garbage -d
+```
+
+## Build WSL Distro From Scratch
 
 ### Use Ubuntu WSL
 
 Install ```nix``` package manager (single-user):
 
-```bash
+```sh
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 ```
 
@@ -39,8 +46,8 @@ Follow the next instruction from _install script_ then proceed.
 
 Build into a ```result```, which is a symlink:
 
-```bash
-nix build .#nixosConfigurations.wsl-aarch64.config.system.build.tarballBuilder \
+```sh
+nix build github:andreifloroiu/nixos-dev#nixosConfigurations.wsl-aarch64.config.system.build.tarballBuilder \
         --extra-experimental-features nix-command --extra-experimental-features flakes \
         --out-link result \
     && echo "Running result..." \
@@ -51,7 +58,7 @@ nix build .#nixosConfigurations.wsl-aarch64.config.system.build.tarballBuilder \
 
 Move resulting file to host OS user folder:
 
-```bash
+```sh
 mkdir  /mnt/c/Users/{{username}}/NixOS
 mv nixos-wsl.tar.gz /mnt/c/Users/{{username}}/NixOS
 ```
@@ -73,18 +80,6 @@ wsl --import NixOS $env:USERPROFILE\NixOS\ nixos-wsl.tar.gz --version 2
     ```nix build '.#nixosConfigurations.jump-x86_64.config.system.build.sd-image'```
     or ```nix build '.#nixosConfigurations.jump-aarch64.config.system.build.sd-image'```
 
-## Update Versions
+## More Read
 
-To update package versions to latest:
-
-```bash
-nix flake update
-```
-
-## Cleanup
-
-Perform a cleanup from time to time:
-
-```bash
-sudo nix-collect-garbage -d
-```
+- [seq CLI](./docs/README.seq.md)

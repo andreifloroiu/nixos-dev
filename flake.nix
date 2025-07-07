@@ -40,37 +40,19 @@
             let
               baseModules = [
                 nixvim.nixosModules.nixvim
-                ./config/nixvim/default.nix
-                ./config/packages-common-config.nix
-                ./config/tmux-config.nix
-                ./config/zsh-config.nix
                 (./hosts + "/${hostname}.nix")
               ];
               devModules =
                 if hostname == "dev" || hostname == "wsl" then
                   [
-                    ./config/packages-config.nix
-                    ./config/packages-dev-config.nix
-                    (
-                      { pkgs, ... }:
-                      {
-                        environment.systemPackages = with pkgs; [
-                          nodejs_22
-                          #nodejs_20
-                          #nodejs_18
-                          yarn
-                          nodePackages.node-gyp
-                          nodePackages.node-gyp-build
-                        ];
-                      }
-                    )
+                    ./modules/development.nix
                   ]
                 else
                   [ ];
               serverModules =
                 if hostname == "jump" || hostname == "web" then
                   [
-                    ./config/packages-server-config.nix
+                    ./modules/server.nix
                   ]
                 else
                   [ ];

@@ -1,8 +1,15 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  imports = [
+    ./base.nix
+  ];
   environment.systemPackages = with pkgs; [
     alacritty
     chromium
@@ -10,17 +17,18 @@
     google-chrome
     pandoc
     remmina
-    tmux
     vscode
     wget
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = lib.mkDefault true;
+    efi.canTouchEfiVariables = lib.mkDefault true;
+  };
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager.enable = lib.mkDefault true;
 
   # Set your time zone.
   time.timeZone = "Europe/Bucharest";
@@ -82,9 +90,12 @@
   users.users.andrei = {
     isNormalUser = true;
     description = "Andrei Floroiu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 

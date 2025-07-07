@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Enable and configure oh-my-zsh
@@ -10,7 +10,7 @@
     ohMyZsh = {
       enable = true;
       plugins = [
-      	"git"
+        "git"
         "sudo"
         "systemadmin"
         "vi-mode"

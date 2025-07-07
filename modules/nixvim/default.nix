@@ -1,24 +1,28 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   imports = [
     ./colorschemes.nix
     ./globals.nix
     ./keymaps.nix
     ./lua.nix
     ./opts.nix
-  ]
-  ++ (lib.filesystem.listFilesRecursive ./plugins)
-  ++ (lib.filesystem.listFilesRecursive ./mini);
+    ./mini
+    ./plugins
+  ];
   programs.nixvim = {
     enable = true;
     autoCmd = [
       {
-        event = ["FileType"];
-        pattern = [ "cs" "csproj" ];
+        event = [ "FileType" ];
+        pattern = [
+          "cs"
+          "csproj"
+        ];
         command = "setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab";
       }
       {
-        event = ["FileType"];
-        pattern = ["nix"];
+        event = [ "FileType" ];
+        pattern = [ "nix" ];
         command = "setlocal tabstop=2 shiftwidth=2 softtabstop=2 expandtab";
       }
     ];
