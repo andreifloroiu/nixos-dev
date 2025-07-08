@@ -166,7 +166,7 @@
         openssl
       ];
     };
-    ssh.startAgent.enable = lib.mkdDefault true;
+    ssh.startAgent.enable = lib.mkDefault true;
   };
 
   # Locale and timezone (can be overridden per host)
