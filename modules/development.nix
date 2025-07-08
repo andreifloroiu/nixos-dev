@@ -32,6 +32,8 @@
     kubectl
     # lazy but for Docker
     lazydocker
+    # lazy SQL
+    lazysql
     # NodeJS
     nodejs_22
     #nodejs_20

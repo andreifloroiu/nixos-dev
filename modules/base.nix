@@ -65,6 +65,8 @@
     bat
     # Monitor resources
     btop
+    # Required by scripts
+    coreutils
     # Can't not have curl
     curl
     # Analyze docker image layers
@@ -164,6 +166,7 @@
         openssl
       ];
     };
+    ssh.startAgent.enable = lib.mkdDefault true;
   };
 
   # Locale and timezone (can be overridden per host)
