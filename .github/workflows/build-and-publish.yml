@@ -2,40 +2,24 @@ name: Build NixOS WSL2 Tarballs
 
 on:
   workflow_dispatch:
-
 jobs:
   build:
-    strategy:
-      matrix:
-        include:
-          - arch: x86_64
-            runs-on: ubuntu-latest
-            #- arch: aarch64
-            #runs-on: ubuntu-latest-arm64
-
-    runs-on: ${{ matrix.runs-on }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-
-      - name: Enable Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
-
-      - name: Build WSL2 Tarball
-        run: |
-          nix build .#nixosConfigurations.wsl-${{ matrix.arch }}.config.system.build.tarballBuilder \
-            --extra-experimental-features nix-command \
-            --extra-experimental-features flakes \
-            --out-link result-${{ matrix.arch }} \
-            && sudo ./result-${{ matrix.arch }}/bin/nixos-wsl-tarball-builder \
-            && sudo mv nixos.wsl nixos-wsl-${{ matrix.arch }}.tar.gz
-
-      - name: Upload Tarball
-        uses: actions/upload-artifact@v4
-        with:
-          name: nixos-wsl-${{ matrix.arch }}
-          path: nixos-wsl-${{ matrix.arch }}.tar.gz
-
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Install Nix
+      uses: cachix/install-nix-action@v24
+      with:
+        extra_nix_config: |
+          experimental-features = nix-command flakes
+    - name: Build WSL2 tarball (x86_64)
+      run: |
+        nix build .#nixosConfigurations.wsl-x86_64.config.system.build.tarball
+        cp result/tarball/nixos-wsl.tar.gz nixos-wsl-x86_64.tar.gz
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: nixos-wsl-x86_64
+        path: nixos-wsl-x86_64.tar.gz
+        retention-days: 7

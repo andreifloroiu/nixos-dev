@@ -38,6 +38,15 @@ sudo nix-collect-garbage -d
 sudo nixos-rebuild switch --rollback
 ```
 
+## Development
+
+Build without applying configuration:
+
+```sh
+nixos-rebuild build --flake .#wsl-aarch64
+nixos-rebuild build --flake .#wsl-x86_64
+```
+
 ## Build WSL Distro From Scratch
 
 ### Use Ubuntu WSL

@@ -10,6 +10,7 @@
   # Import configurations
   imports = [
     ./nixvim
+    ./scripts
     ./tmux
     ./zsh
   ];
