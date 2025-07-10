@@ -16,6 +16,9 @@
     docker-desktop = {
       enable = lib.mkDefault true;
     };
+    wslConf = {
+      network.generateHosts = lib.mkDefault false;
+    };
   };
 
   services.vscode-server.enable = lib.mkDefault true;
