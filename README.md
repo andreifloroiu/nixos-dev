@@ -38,7 +38,7 @@ sudo nix-collect-garbage -d
 sudo nixos-rebuild switch --rollback
 ```
 
-## development
+## Development
 
 Build without applying configuration:
 
