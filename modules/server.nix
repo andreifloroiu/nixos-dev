@@ -41,6 +41,13 @@
   environment.sessionVariables = {
     MC_SKIN = "dark";
   };
+
+  # Set your time zone.
+  time.timeZone = lib.mkDefault "Europe/Bucharest";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
+
   networking = {
     firewall = {
       allowedTCPPorts = [ 22 ];
@@ -68,7 +75,7 @@
       settings = {
         PermitRootLogin = lib.mkDefault "no";
         PasswordAuthentication = lib.mkDefault false;
-      };;
+      };
     };
   };
   # Podman configuration
