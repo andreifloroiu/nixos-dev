@@ -71,7 +71,7 @@
       };
     };
     openssh = {
-      enable = lib.mkDefault true;
+      #enable = lib.mkDefault true;
       settings = {
         PermitRootLogin = lib.mkDefault "no";
         PasswordAuthentication = lib.mkDefault false;
