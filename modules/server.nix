@@ -8,6 +8,10 @@
   imports = [
     ./base.nix
   ];
+  boot.loader = {
+    systemd-boot.enable = lib.mkDefault true;
+    efi.canTouchEfiVariables = lib.mkDefault true;
+  };
   environment.systemPackages = with pkgs; [
     # Azure CLI... needed, not wanted
     azure-cli
@@ -43,19 +47,28 @@
     };
   };
   # Configure fail2ban
-  services.fail2ban = {
-    enable = lib.mkDefault true;
-    maxretry = lib.mkDefault 10;
-    ignoreIP = [
-      "127.0.0.1/8"
-    ];
-    bantime = lib.mkDefault "1h";
-    bantime-increment = {
+  services = {
+    fail2ban = {
       enable = lib.mkDefault true;
-      formula = "ban.Time * math.exp(float(ban.Count+1)*banFactor)/math.exp(1*banFactor)";
-      multipliers = "1 2 4 8 16 32 64";
-      maxtime = "168h";
-      overalljails = true;
+      maxretry = lib.mkDefault 10;
+      ignoreIP = [
+        "127.0.0.1/8"
+      ];
+      bantime = lib.mkDefault "1h";
+      bantime-increment = {
+        enable = lib.mkDefault true;
+        formula = "ban.Time * math.exp(float(ban.Count+1)*banFactor)/math.exp(1*banFactor)";
+        multipliers = "1 2 4 8 16 32 64";
+        maxtime = "168h";
+        overalljails = true;
+      };
+    };
+    openssh = {
+      enable = lib.mkDefault true;
+      settings = {
+        PermitRootLogin = lib.mkDefault "no";
+        PasswordAuthentication = lib.mkDefault false;
+      };;
     };
   };
   # Podman configuration
