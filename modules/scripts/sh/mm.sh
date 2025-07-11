@@ -18,7 +18,8 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
     tmux new-window -t "$SESSION_NAME:2" -n "git" -c "$CWD"
     # Start lazygit in git window if available and in a git repo
     if command -v lazygit >/dev/null 2>&1 && [ -d "$CWD/.git" ]; then
-        tmux send-keys -t "$SESSION_NAME:2" "lazygit" C-m
+        #tmux send-keys -t "$SESSION_NAME:2" "lazygit" C-m
+        tmux send-keys -t "$SESSION_NAME:2" "echo 'lazygit here'" C-m
     fi
     tmux new-window -t "$SESSION_NAME:3" -n "run" -c "$CWD"
     tmux new-window -t "$SESSION_NAME:4" -n "nav" -c "$CWD"

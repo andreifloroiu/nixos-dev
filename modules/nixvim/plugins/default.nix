@@ -21,6 +21,9 @@
       hijackUnnamedBufferWhenOpening = true;
       ignoreBufferOnSetup = false;
       openOnSetup = true;
+      view = {
+        width = 50;
+      };
     };
     undotree = {
       enable = true;
