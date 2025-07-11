@@ -12,10 +12,23 @@
   ];
   environment.systemPackages = with pkgs; [
     alacritty
+    ccid
     chromium
     freerdp
+    gnutls
     google-chrome
+    gpa
+    hunspell
+    hunspellDicts.en_US
+    hunspellDicts.ro_RO
+    libreoffice-qt
+    nss
+    opensc
+    opera
+    p11-kit
     pandoc
+    pcsc-lite
+    pcsc-tools
     remmina
     vscode
     wget
@@ -48,28 +61,33 @@
     LC_TIME = "ro_RO.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  # Enable the XFCE Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  #services.xserver.desktopManager.xfce.enable = true;
-  services.xserver.desktopManager.pantheon.enable = true;
-  #services.xserver.displayManager.lightdm.greeters.pantheon.enable = false;
-  #services.xserver.displayManager.lightdm.enable = false;
+  services = {
+    patheon.apps.enable = true;
+    xserver = {
+      enable = true;
+      desktopManager = {
+        pantheon.enable = true;
+      };
+      displayManager = {
+        lightdm = {
+          enable = true;
+          greeters.pantheon.enable = true;
+        };
+      };
+    };
+  };
   services.pantheon.apps.enable = false;
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  security.polkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -77,7 +95,6 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
@@ -92,6 +109,9 @@
     description = "Andrei Floroiu";
     extraGroups = [
       "networkmanager"
+      "pcscd"
+      "plugdev"
+      "video"
       "wheel"
     ];
     packages = with pkgs; [
