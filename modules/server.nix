@@ -52,7 +52,6 @@
   networking = {
     firewall = {
       enable = lib.mkDefault true;
-      allowedTCPPorts = lib.mkDefault [ 22 ];
     };
   };
 
