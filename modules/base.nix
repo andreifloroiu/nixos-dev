@@ -133,7 +133,7 @@
     # Unzip
     unzip
     # Vault CLI
-    vault
+    vault-bin
     # Alternative to curl
     wget
     # Dev alternative to tmux
