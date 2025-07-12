@@ -47,12 +47,22 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
+  console.keyMap = lib.mkDefault "us";
 
   networking = {
     firewall = {
-      allowedTCPPorts = [ 22 ];
+      enable = lib.mkDefault true;
+      allowedTCPPorts = lib.mkDefault [ 22 ];
     };
   };
+
+  users.users = {
+    # Disable root login
+    root.hashedPassword = lib.mkDefault "!";
+  };
+
+  security.sudo.wheelNeedsPassword = false;
+
   # Configure fail2ban
   services = {
     fail2ban = {
@@ -74,6 +84,7 @@
       settings = {
         PermitRootLogin = lib.mkDefault "no";
         PasswordAuthentication = lib.mkDefault false;
+        KbdInteractiveAuthentication = lib.mkDefault false;
       };
     };
   };
