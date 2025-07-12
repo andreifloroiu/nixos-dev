@@ -8,10 +8,6 @@
   imports = [
     ./base.nix
   ];
-  boot.loader = {
-    systemd-boot.enable = lib.mkDefault true;
-    efi.canTouchEfiVariables = lib.mkDefault true;
-  };
   environment.systemPackages = with pkgs; [
     # Azure CLI... needed, not wanted
     azure-cli
