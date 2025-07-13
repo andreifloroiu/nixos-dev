@@ -22,7 +22,11 @@
       plugins=(git sudo systemadmin vi-mode)
       source $ZSH/oh-my-zsh.sh
     ";
-    promptInit = "";
+    promptInit = ''
+      if [[ -z $TMUX ]]; then
+        fastfetch
+      fi
+    '';
     shellAliases = {
       la = "eza -lh";
       ld = "lazydocker";
