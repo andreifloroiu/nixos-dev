@@ -82,6 +82,8 @@
     dust
     # Better ls
     eza
+    # Faster then neofetch
+    fastfetch
     # Easy alternative to find
     fd
     # file command
