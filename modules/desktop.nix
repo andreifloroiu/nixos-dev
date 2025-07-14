@@ -43,9 +43,9 @@
   ];
 
   programs = {
-    firefox.enable = true;
+    firefox.enable = lib.mkDefault true;
     hyprland = {
-      enable = true;
+      enable = lib.mkDefault true;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage =
         inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
@@ -55,7 +55,7 @@
   };
 
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = lib.mkDefault true;
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.PLUGIN_NAME
     ];
@@ -83,16 +83,16 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing.enable = lib.mkDefault true;
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  security.polkit.enable = true;
+  hardware.pulseaudio.enable = lib.mkDefault false;
+  security.rtkit.enable = lib.mkDefault true;
+  security.polkit.enable = lib.mkDefault true;
   services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+    enable = lib.mkDefault true;
+    alsa.enable = lib.mkDefault true;
+    alsa.support32Bit = lib.mkDefault true;
+    pulse.enable = lib.mkDefault true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
     # use the example session manager (no others are packaged yet so this is enabled by default,
@@ -117,12 +117,12 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = lib.mkDefault true;
 
   # Enable Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  services.blueman.enable = true;
+  hardware.bluetooth.enable = lib.mkDefault true;
+  hardware.bluetooth.powerOnBoot = lib.mkDefault true;
+  services.blueman.enable = lib.mkDefault true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
