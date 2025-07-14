@@ -16,10 +16,6 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,6 +31,7 @@
       nixpkgs,
       nixvim,
       home-manager,
+      hyprland,
       nixos-wsl,
       self,
       vscode-server,
@@ -108,6 +105,7 @@
             imports = [
               home-manager.nixosModules.default
               nixvim.nixosModules.default
+              hyprland.nixosModules.default
               ./modules/desktop.nix
             ];
           };
