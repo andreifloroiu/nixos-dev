@@ -10,6 +10,13 @@
   imports = [
     ./base.nix
   ];
+
+  # Bootloader.
+  boot.loader = {
+    systemd-boot.enable = lib.mkDefault true;
+    efi.canTouchEfiVariables = lib.mkDefault true;
+  };
+
   environment.systemPackages = with pkgs; [
     alacritty
     ccid
@@ -21,6 +28,7 @@
     hunspell
     hunspellDicts.en_US
     hunspellDicts.ro_RO
+    kitty
     libreoffice-qt
     nss
     opensc
@@ -34,10 +42,23 @@
     wget
   ];
 
-  # Bootloader.
-  boot.loader = {
-    systemd-boot.enable = lib.mkDefault true;
-    efi.canTouchEfiVariables = lib.mkDefault true;
+  programs = {
+    firefox.enable = true;
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage =
+        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      #withUWSM = true;
+      #xwayland.enable = true;
+    };
+  };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    plugins = [
+      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.PLUGIN_NAME
+    ];
   };
 
   # Enable networking
@@ -61,27 +82,6 @@
     LC_TIME = "ro_RO.UTF-8";
   };
 
-  services = {
-    patheon.apps.enable = true;
-    xserver = {
-      enable = true;
-      desktopManager = {
-        pantheon.enable = true;
-      };
-      displayManager = {
-        lightdm = {
-          enable = true;
-          greeters.pantheon.enable = true;
-        };
-      };
-    };
-  };
-  services.pantheon.apps.enable = false;
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
   # Enable CUPS to print documents.
   services.printing.enable = true;
   # Enable sound with pipewire.
@@ -114,13 +114,7 @@
       "video"
       "wheel"
     ];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
   };
-
-  # Install firefox.
-  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -129,6 +123,8 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
   services.blueman.enable = true;
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -155,5 +151,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 }
