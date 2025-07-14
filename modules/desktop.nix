@@ -17,6 +17,9 @@
     efi.canTouchEfiVariables = lib.mkDefault true;
   };
 
+  # Select internationalisation properties.
+  console.keyMap = lib.mkDefault "us";
+
   environment.systemPackages = with pkgs; [
     alacritty
     ccid
@@ -54,21 +57,8 @@
     };
   };
 
-  wayland.windowManager.hyprland = {
-    enable = lib.mkDefault true;
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.PLUGIN_NAME
-    ];
-  };
-
   # Enable networking
   networking.networkmanager.enable = lib.mkDefault true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Bucharest";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ro_RO.UTF-8";
@@ -106,7 +96,6 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.andrei = {
     isNormalUser = true;
-    description = "Andrei Floroiu";
     extraGroups = [
       "networkmanager"
       "pcscd"
