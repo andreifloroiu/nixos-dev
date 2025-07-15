@@ -7,5 +7,5 @@
 }:
 
 {
-  networking.hostName = "desktop"; # Define your hostName
+  networking.hostName = lib.mkDefault "dev";
 }

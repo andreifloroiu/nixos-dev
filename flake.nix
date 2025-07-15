@@ -44,6 +44,7 @@
         system: hostname:
         nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules =
             let
               baseModules = [
@@ -55,6 +56,14 @@
                 if hostname == "dev" then
                   [
                     ./modules/development.nix
+                  ]
+                else
+                  [ ];
+              desktopModules =
+                if hostname == "desktop" then
+                  [
+                    ./modules/desktop.nix
+                    hyprland.nixosModules.default
                   ]
                 else
                   [ ];
@@ -75,7 +84,7 @@
                 else
                   [ ];
             in
-            baseModules ++ devModules ++ wslModules ++ serverModules;
+            baseModules ++ desktopModules ++ devModules ++ wslModules ++ serverModules;
         };
     in
     {
@@ -157,11 +166,13 @@
       nixosConfigurations = {
         # x86_64 configurations
         "dev-x86_64" = mkSystem systemX86_64 "dev";
+        "desktop-x86_64" = mkSystem systemX86_64 "desktop";
         "wsl-x86_64" = mkSystem systemX86_64 "wsl";
         "jump-x86_64" = mkSystem systemX86_64 "jump";
         "web-x86_64" = mkSystem systemX86_64 "web";
         # aarch64 configurations
         "dev-aarch64" = mkSystem systemAarch64 "dev";
+        "desktop-aarch64" = mkSystem systemAarch64 "desktop";
         "wsl-aarch64" = mkSystem systemAarch64 "wsl";
         "jump-aarch64" = mkSystem systemAarch64 "jump";
         "web-aarch64" = mkSystem systemAarch64 "web";
