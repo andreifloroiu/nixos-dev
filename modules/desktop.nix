@@ -24,6 +24,7 @@
     alacritty
     ccid
     chromium
+    dunst
     freerdp
     gnutls
     google-chrome
@@ -32,6 +33,7 @@
     hunspellDicts.en_US
     hunspellDicts.ro_RO
     kitty
+    libnotify
     libreoffice-qt
     nss
     opensc
@@ -41,7 +43,13 @@
     pcsc-lite
     pcsc-tools
     remmina
+    rofi-wayland
+    swww
     vscode
+    (pkgs.waybar.overrideAttrs (oldAttrs: {
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    }))
+    wezterm
     wget
   ];
 
@@ -52,8 +60,24 @@
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage =
         inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-      #withUWSM = true;
-      #xwayland.enable = true;
+      nvidiaPatches = lib.mkDefault true;
+      xwayland.enable = lib.mkDefault true;
+    };
+  };
+
+  hardware = {
+    opengl.enable = true;
+    nvidia.modesetting.enable = true;
+  };
+  xdg.portal = {
+    enable = lib.mkDefault true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+  security.rtkit.enable = lib.mkDefault true;
+  # Enable wayland
+  wayland.windowManager.hyprland = {
+    enable = true;
+    settings = {
     };
   };
 
@@ -75,23 +99,14 @@
   # Enable CUPS to print documents.
   services.printing.enable = lib.mkDefault true;
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = lib.mkDefault false;
-  security.rtkit.enable = lib.mkDefault true;
-  security.polkit.enable = lib.mkDefault true;
+  sound.enable = true;
   services.pipewire = {
     enable = lib.mkDefault true;
     alsa.enable = lib.mkDefault true;
     alsa.support32Bit = lib.mkDefault true;
     pulse.enable = lib.mkDefault true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    jack.enable = lib.mkDefault true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.andrei = {
@@ -113,7 +128,10 @@
   hardware.bluetooth.powerOnBoot = lib.mkDefault true;
   services.blueman.enable = lib.mkDefault true;
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -122,17 +140,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
