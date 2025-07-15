@@ -60,7 +60,6 @@
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage =
         inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-      nvidiaPatches = lib.mkDefault true;
       xwayland.enable = lib.mkDefault true;
     };
   };
@@ -74,12 +73,6 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
   security.rtkit.enable = lib.mkDefault true;
-  # Enable wayland
-  wayland.windowManager.hyprland = {
-    enable = true;
-    settings = {
-    };
-  };
 
   # Enable networking
   networking.networkmanager.enable = lib.mkDefault true;
@@ -99,7 +92,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = lib.mkDefault true;
   # Enable sound with pipewire.
-  sound.enable = true;
   services.pipewire = {
     enable = lib.mkDefault true;
     alsa.enable = lib.mkDefault true;

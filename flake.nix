@@ -44,6 +44,7 @@
         system: hostname:
         nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit inputs; };
           modules =
             let
               baseModules = [
@@ -62,6 +63,7 @@
                 if hostname == "desktop" then
                   [
                     ./modules/desktop.nix
+                    hyprland.nixosModules.default
                   ]
                 else
                   [ ];

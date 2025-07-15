@@ -50,8 +50,8 @@ nixos-rebuild build --flake .#wsl-x86_64
 ## Build ISO
 
 ```sh
-nix build .#nixosConfigurations.desktop-x86_64.config.system.build.isoImage
-nix build github:andreifloroiu/nixos-dev#nixosConfigurations.desktop-x86_64.config.system.build.isoImage
+nix build --flake .#nixosConfigurations.desktop-x86_64.config.system.build.isoImage
+nix build --flake github:andreifloroiu/nixos-dev#nixosConfigurations.desktop-x86_64.config.system.build.isoImage
 ```
 
 ## Build WSL Distro From Scratch
