@@ -17,8 +17,6 @@
 
   # Basic system configuration that all systems should have
   nix = {
-    #package = pkgs.nixFlakes;
-
     # Automatic garbage collection
     gc = {
       automatic = true;
@@ -34,7 +32,6 @@
         "nix-command"
         "flakes"
       ];
-
       # Trusted users for binary cache
       trusted-users = [
         "root"
@@ -115,7 +112,7 @@
     # Cool distro display
     neofetch
     # nixos generators
-    #nixos-generators
+    nixos-generators
     # nix tree
     nix-tree
     # nix output monitor
