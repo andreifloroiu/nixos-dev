@@ -114,6 +114,8 @@
     ncdu
     # Cool distro display
     neofetch
+    # nixos generators
+    #nixos-generators
     # nix tree
     nix-tree
     # nix output monitor
