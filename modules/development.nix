@@ -10,7 +10,7 @@
   ];
   environment.systemPackages = with pkgs; [
     # Azure CLI... needed, not wanted
-    azure-cli
+    #azure-cli
     # .NET SDK packages
     (
       with dotnetCorePackages;
