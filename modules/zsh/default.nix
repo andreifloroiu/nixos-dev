@@ -23,6 +23,8 @@
       source $ZSH/oh-my-zsh.sh
     ";
     promptInit = ''
+      # Disable flow control so CTRL+Q, CTRL+S can be used for bindings (tmux in ssh)
+      stty -ixon
       if [[ -z $TMUX ]]; then
         fastfetch
       fi
