@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 {
@@ -15,7 +13,6 @@
     (
       with dotnetCorePackages;
       combinePackages [
-        sdk_6_0
         sdk_8_0
         sdk_9_0
       ]
@@ -61,7 +58,7 @@
     DOTNET_ROOT = "${pkgs.dotnetCorePackages.sdk_8_0}";
     MC_SKIN = "dark";
   };
-  nixpkgs.config.permittedInsecurePackages = [
-    "dotnet-sdk-6.0.428"
-  ];
+  #nixpkgs.config.permittedInsecurePackages = [
+  #  "dotnet-sdk-6.0.428"
+  #];
 }

@@ -183,8 +183,10 @@
   # Basic security settings
   security = {
     # Don't allow users to install packages without sudo
-    sudo.enable = true;
-
+    sudo = {
+      enable = true;
+      wheelNeedsPassword = lib.mkDefault false;
+    };
   };
 
   networking = {
