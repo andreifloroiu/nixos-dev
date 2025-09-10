@@ -99,6 +99,8 @@
     jq
     # lazy but for Git
     lazygit
+    # lazy but for logs
+    lazyjournal
     # lsof
     lsof
     # ls but for hardware
