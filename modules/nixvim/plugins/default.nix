@@ -13,16 +13,18 @@
     dap-ui.enable = true;
     nvim-tree = {
       enable = true;
-      autoClose = false;
-      autoReloadOnWrite = true;
-      disableNetrw = false;
-      hijackCursor = false;
-      hijackNetrw = true;
-      hijackUnnamedBufferWhenOpening = true;
-      ignoreBufferOnSetup = false;
-      openOnSetup = true;
-      view = {
-        width = 50;
+      settings = {
+        autoClose = false;
+        autoReloadOnWrite = true;
+        disableNetrw = false;
+        hijackCursor = false;
+        hijackNetrw = true;
+        hijackUnnamedBufferWhenOpening = true;
+        ignoreBufferOnSetup = false;
+        openOnSetup = true;
+        view = {
+          width = 50;
+        };
       };
     };
     undotree = {
