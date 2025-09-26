@@ -1,10 +1,14 @@
 #!/bin/sh
 
+set -e
+
 # Get current directory name and parent directory name
 CWD=$(pwd)
 CWD_NAME=$(basename "$CWD")
+CWD_NAME=$(printf "%s" "$CWD_NAME" | cut -c1-12)
 PARENT_CWD=$(dirname "$CWD")
 PARENT_CWD_NAME=$(basename "$PARENT_CWD")
+PARENT_CWD_NAME=$(printf "%s" "$PARENT_CWD_NAME" | cut -c1-12)
 
 # Create session name in format "cwd (parent-cwd)"
 SESSION_NAME="${CWD_NAME} (${PARENT_CWD_NAME})"
@@ -20,6 +24,7 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
     if command -v lazygit >/dev/null 2>&1 && [ -d "$CWD/.git" ]; then
         #tmux send-keys -t "$SESSION_NAME:2" "lazygit" C-m
         tmux send-keys -t "$SESSION_NAME:2" "echo 'lazygit here'" C-m
+        tmux send-keys -t "$SESSION_NAME:2" "lg"
     fi
     tmux new-window -t "$SESSION_NAME:3" -n "run" -c "$CWD"
     tmux new-window -t "$SESSION_NAME:4" -n "nav" -c "$CWD"
