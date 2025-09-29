@@ -127,6 +127,8 @@
     superfile
     # grep in rust
     ripgrep
+    # good for plex
+    rsync
     # strace
     strace
     # tree command
