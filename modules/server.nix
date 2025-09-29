@@ -9,28 +9,16 @@
     ./base.nix
   ];
   environment.systemPackages = with pkgs; [
-    # Azure CLI... needed, not wanted
-    azure-cli
     # Analyse docker images
     dive
-    # Github CLI
-    gh
-    # GCP CLI
-    google-cloud-sdk
     # ping but with graph
     gping
-    # docker-compose easier then k8s
-    docker-compose
-    # kubectl
-    kubectl
     # lazy but for Docker
     lazydocker
     # For certificates
     openssl
     # TUI for podman
     podman-tui
-    # delta file sync
-    rsync
     # tldr any command instead of man, e.g. tldr fd
     tldr
   ];
