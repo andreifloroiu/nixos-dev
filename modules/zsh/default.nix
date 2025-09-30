@@ -7,22 +7,25 @@
     enableCompletion = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
-    ohMyZsh = {
-      enable = true;
-      plugins = [
-        "git"
-        "sudo"
-        "systemadmin"
-        "vi-mode"
-      ];
-      theme = "re5et";
-    };
-    interactiveShellInit = "
-      export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
-      plugins=(git sudo systemadmin vi-mode)
-      source $ZSH/oh-my-zsh.sh
-    ";
     promptInit = ''
+      # Load zinit
+      if [[ ! -f ~/.zinit/bin/zinit.zsh ]]; then
+        mkdir -p ~/.zinit
+        git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin
+      fi
+      source ~/.zinit/bin/zinit.zsh
+
+      # Plugins from ThePrimeagen’s setup
+      zinit light zsh-users/zsh-autosuggestions
+      zinit light zsh-users/zsh-syntax-highlighting
+      zinit light zsh-users/zsh-completions
+      zinit light djui/alias-tips
+      zinit light agkozak/zsh-z
+
+      # Prompt (powerlevel10k, as in video)
+      zinit light romkatv/powerlevel10k
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
       # Disable flow control so CTRL+Q, CTRL+S can be used for bindings (tmux in ssh)
       stty -ixon
       if [[ -z $TMUX ]]; then
