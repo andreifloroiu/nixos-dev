@@ -2,6 +2,12 @@
 
 [My NixOS development flake](https://nixos.wiki/wiki/flakes) with configuration files for different hosts.
 
+## Prerequisites `nerd-fonts`
+
+In order for `nerd-fonts` to work in `WSL2` use [this repo ryanoasis/nerd-fonts](https://github.com/ryanoasis/nerd-fonts) as a source:
+and run the following command in `Powershell` in `Windows`
+`& ([scriptblock]::Create((iwr 'https://to.loredo.me/Install-NerdFont.ps1')))`
+
 ## Apply to Current NixOS System
 
 ### __x86_64__

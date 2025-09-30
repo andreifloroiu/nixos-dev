@@ -180,9 +180,13 @@
   i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
 
   # Some nerd fonts
-  fonts.packages = [
-    pkgs.nerd-fonts.droid-sans-mono
-  ];
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+    ];
+    enableDefaultPackages = true;
+    fontconfig.enable = true;
+  };
 
   # Basic security settings
   security = {
