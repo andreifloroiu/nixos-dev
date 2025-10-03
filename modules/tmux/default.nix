@@ -20,7 +20,7 @@ in
     escapeTime = 10;
     keyMode = "vi";
     terminal = "tmux-256color";
-    historyLimit = 50000;
+    historyLimit = 10000;
 
     extraConfig =
       with config.theme;
@@ -30,6 +30,7 @@ in
         run-shell '${copycat}/share/tmux-plugins/copycat/copycat.tmux'
         run-shell '${sensible}/share/tmux-plugins/sensible/sensible.tmux'
         run-shell '${urlview}/share/tmux-plugins/urlview/urlview.tmux'
+
 
         bind-key R run-shell ' \
           tmux source-file /etc/tmux.conf > /dev/null; \
@@ -83,6 +84,8 @@ in
 
         set-option -g clock-mode-colour '${colors.dominant}'
 
+        set-option -g base-index 1
+        set-option -g renumber-windows on
       '';
   };
 }

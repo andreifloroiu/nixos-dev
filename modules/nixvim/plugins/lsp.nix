@@ -1,6 +1,6 @@
 {
   config,
-  pkgs,
+  helpers,
   lib,
   ...
 }:
@@ -16,21 +16,60 @@ let
   hasJava = hasPackage "openjdk" || hasPackage "jdk";
 in
 {
-  programs.nixvim.plugins.lsp = {
-    enable = true;
-    keymaps = {
-      diagnostic = {
-        "<leader>j" = "goto_next";
-        "<leader>k" = "goto_prev";
-      };
-      lspBuf = {
-        K = "hover";
-        gD = "references";
-        gd = "definition";
-        gi = "implementation";
-        gt = "type_definition";
-      };
-    };
+  programs.nixvim.plugins = {
+    lsp.enable = true;
+  };
+  programs.nixvim.lsp = {
+    keymaps = [
+      {
+        key = "gd";
+        lspBufAction = "definition";
+      }
+      {
+        key = "gD";
+        lspBufAction = "references";
+      }
+      {
+        key = "gt";
+        lspBufAction = "type_definition";
+      }
+      {
+        key = "gi";
+        lspBufAction = "implementation";
+      }
+      {
+        key = "K";
+        lspBufAction = "hover";
+      }
+      {
+        action.__raw = "function() vim.diagnostic.jump({ count=-1, float=true }) end";
+        key = "<leader>k";
+      }
+      {
+        action.__raw = "function() vim.diagnostic.jump({ count=1, float=true }) end";
+        key = "<leader>j";
+      }
+      {
+        action = "<CMD>LspStop<Enter>";
+        key = "<leader>lx";
+      }
+      {
+        action = "<CMD>LspStart<Enter>";
+        key = "<leader>ls";
+      }
+      {
+        action = "<CMD>LspRestart<Enter>";
+        key = "<leader>lr";
+      }
+      {
+        action.__raw = "require('telescope.builtin').lsp_definitions";
+        key = "gd";
+      }
+      {
+        action = "<CMD>Lspsaga hover_doc<Enter>";
+        key = "K";
+      }
+    ];
     servers = {
       bashls.enable = true;
       clangd.enable = true;
@@ -92,7 +131,8 @@ in
           };
         };
       };
-      ts_ls.enable = lib.mkDefault hasNodejs;
+      #ts_ls.enable = lib.mkDefault hasNodejs;
+      tsserver.enable = lib.mkDefault hasNodejs;
       yamlls.enable = true;
     };
   };

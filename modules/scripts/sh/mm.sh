@@ -6,21 +6,19 @@ set -e
 CWD=$(pwd)
 CWD_NAME=$(basename "$CWD")
 CWD_NAME=$(printf "%s" "$CWD_NAME" | cut -c1-16)
+CWD_NAME=$(echo "$CWD_NAME" | tr -d '.')
 PARENT_CWD=$(dirname "$CWD")
 PARENT_CWD_NAME=$(basename "$PARENT_CWD")
 PARENT_CWD_NAME=$(printf "%s" "$PARENT_CWD_NAME" | cut -c1-16)
+PARENT_CWD_NAME=$(echo "$PARENT_CWD_NAME" | tr -d '.')
 
 # Create session name in format "cwd (parent-cwd)"
 SESSION_NAME="${CWD_NAME} (${PARENT_CWD_NAME})"
 
 # Check if tmux session already exists
 if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
-    # sys window with btop
-    tmux new-session -d -s "$SESSION_NAME" -n "sys" -c "$CWD"
-    tmux send-keys -t "$SESSION_NAME:0" "echo 'btop here'" C-m
-    tmux send-keys -t "$SESSION_NAME:0" "btop"
     # neovim window
-    tmux new-window -t "$SESSION_NAME:1" -n "vi" -c "$CWD"
+    tmux new-session -d -s "$SESSION_NAME" -n "vi" -c "$CWD"
     tmux send-keys -t "$SESSION_NAME:1" "echo 'neovim here'" C-m
     tmux send-keys -t "$SESSION_NAME:1" "mn"
     # git window
@@ -40,9 +38,12 @@ if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
     # logs window
     tmux new-window -t "$SESSION_NAME:7" -n "logs" -c "$CWD"
     tmux send-keys -t "$SESSION_NAME:7" "echo 'lazyjournal here'" C-m
-    tmux send-keys -t "$SESSION_NAME:7" "lg"
+    tmux send-keys -t "$SESSION_NAME:7" "lj"
     # other windows
-    tmux new-window -t "$SESSION_NAME:8" -n "more" -c "$CWD"
+    tmux new-window -t "$SESSION_NAME:8" -n "sys" -c "$CWD"
+    tmux send-keys -t "$SESSION_NAME:8" "echo 'btop here'" C-m
+    tmux send-keys -t "$SESSION_NAME:8" "btop"
+
     tmux new-window -t "$SESSION_NAME:9" -n "end" -c "$CWD"
     # Select window 1 (vi)
     tmux select-window -t "$SESSION_NAME:1"
