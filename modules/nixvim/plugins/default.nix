@@ -14,14 +14,11 @@
     nvim-tree = {
       enable = true;
       settings = {
-        autoClose = false;
-        autoReloadOnWrite = true;
-        disableNetrw = false;
-        hijackCursor = false;
-        hijackNetrw = true;
-        hijackUnnamedBufferWhenOpening = true;
-        ignoreBufferOnSetup = false;
-        openOnSetup = true;
+        auto_reload_on_write = true;
+        disable_netrw = false;
+        hijack_cursor = false;
+        hijack_netrw = true;
+        hijack_unnamed_buffer_when_opening = true;
         view = {
           width = 50;
         };

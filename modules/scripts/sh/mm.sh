@@ -17,12 +17,8 @@ SESSION_NAME="${CWD_NAME} (${PARENT_CWD_NAME})"
 
 # Check if tmux session already exists
 if ! tmux has-session -t "$SESSION_NAME" 2>/dev/null; then
-    # sys window with btop
-    #tmux new-session -d -s "$SESSION_NAME" -n "sys" -c "$CWD"
-    #tmux send-keys -t "$SESSION_NAME:0" "echo 'btop here'" C-m
-    #tmux send-keys -t "$SESSION_NAME:0" "btop"
     # neovim window
-    tmux new-window -t "$SESSION_NAME:1" -n "vi" -c "$CWD"
+    tmux new-session -d -s "$SESSION_NAME" -n "vi" -c "$CWD"
     tmux send-keys -t "$SESSION_NAME:1" "echo 'neovim here'" C-m
     tmux send-keys -t "$SESSION_NAME:1" "mn"
     # git window
