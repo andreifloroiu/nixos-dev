@@ -20,7 +20,7 @@ in
     escapeTime = 10;
     keyMode = "vi";
     terminal = "tmux-256color";
-    historyLimit = 50000;
+    historyLimit = 10000;
 
     extraConfig =
       with config.theme;

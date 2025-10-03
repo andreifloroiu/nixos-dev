@@ -6,9 +6,11 @@ set -e
 CWD=$(pwd)
 CWD_NAME=$(basename "$CWD")
 CWD_NAME=$(printf "%s" "$CWD_NAME" | cut -c1-16)
+CWD_NAME=$(echo "$CWD_NAME" | tr -d '.')
 PARENT_CWD=$(dirname "$CWD")
 PARENT_CWD_NAME=$(basename "$PARENT_CWD")
 PARENT_CWD_NAME=$(printf "%s" "$PARENT_CWD_NAME" | cut -c1-16)
+PARENT_CWD_NAME=$(echo "$PARENT_CWD_NAME" | tr -d '.')
 
 # Create session name in format "cwd (parent-cwd)"
 SESSION_NAME="${CWD_NAME} (${PARENT_CWD_NAME})"

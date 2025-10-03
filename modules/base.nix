@@ -123,6 +123,8 @@
     nmap
     # The new shell
     nushell
+    # For docs
+    pandoc
     # A super file explorer
     superfile
     # grep in rust
