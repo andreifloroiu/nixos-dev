@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   # Enable and configure oh-my-zsh
@@ -30,6 +30,9 @@
       stty -ixon
       if [[ -z $TMUX ]]; then
         nerdfetch
+      fi
+      if ! command -v python3 &> /dev/null; then
+        unset -f alias*tips__preexec 2>/dev/null || true
       fi
     '';
     shellAliases = {
