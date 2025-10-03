@@ -31,6 +31,7 @@ in
         run-shell '${sensible}/share/tmux-plugins/sensible/sensible.tmux'
         run-shell '${urlview}/share/tmux-plugins/urlview/urlview.tmux'
 
+
         bind-key R run-shell ' \
           tmux source-file /etc/tmux.conf > /dev/null; \
           tmux display-message "sourced /etc/tmux.conf"'
@@ -83,6 +84,8 @@ in
 
         set-option -g clock-mode-colour '${colors.dominant}'
 
+        set-option -g base-index 1
+        set-option -g renumber-windows on
       '';
   };
 }
