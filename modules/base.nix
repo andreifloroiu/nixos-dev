@@ -111,6 +111,7 @@
     nano
     # Another disk utility
     ncdu
+    nerdfetch
     # Cool distro display
     neofetch
     # nixos generators
