@@ -42,10 +42,7 @@
     oha
     # For certificates
     openssl
-    python3
     python3Packages.virtualenv
-    # delta file sync
-    rsync
     # something I need
     seq-cli
     # tldr any command instead of man, e.g. tldr fd
