@@ -31,9 +31,6 @@
       if [[ -z $TMUX ]]; then
         nitch
       fi
-      if ! command -v python3 &> /dev/null; then
-        unset -f alias*tips__preexec 2>/dev/null || true
-      fi
     '';
     shellAliases = {
       la = "eza -lh";
@@ -45,6 +42,7 @@
       #node18 = "nix shell nixpkgs#nodejs_18";
       myvim = "nvim .";
       mn = "myvim";
+      n = "nitch";
       shhh = "sudo shutdown now";
       tk = "tmux kill-session";
     };

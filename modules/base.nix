@@ -129,6 +129,8 @@
     nushell
     # For docs
     pandoc
+    # PeteTong
+    python3
     # A super file explorer
     superfile
     # grep in rust

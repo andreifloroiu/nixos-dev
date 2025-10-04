@@ -1,6 +1,5 @@
 {
   config,
-  helpers,
   lib,
   ...
 }:
