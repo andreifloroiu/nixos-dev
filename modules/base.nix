@@ -111,9 +111,12 @@
     nano
     # Another disk utility
     ncdu
+    # Another fetch
     nerdfetch
     # Cool distro display
     neofetch
+    # Fastest fetch
+    nitch
     # nixos generators
     nixos-generators
     # nix tree
