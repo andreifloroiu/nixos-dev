@@ -29,7 +29,7 @@
       # Disable flow control so CTRL+Q, CTRL+S can be used for bindings (tmux in ssh)
       stty -ixon
       if [[ -z $TMUX ]]; then
-        nerdfetch
+        nitch
       fi
       if ! command -v python3 &> /dev/null; then
         unset -f alias*tips__preexec 2>/dev/null || true
