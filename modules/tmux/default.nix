@@ -12,8 +12,6 @@ let
   '';
 in
 {
-  imports = [ ./theme.nix ];
-
   programs.tmux = {
     enable = true;
     shortcut = "q";
@@ -22,16 +20,23 @@ in
     terminal = "tmux-256color";
     historyLimit = 10000;
 
+    plugins = with pkgs.tmuxPlugins; [
+      catppuccin
+      continuum
+      copycat
+      resurrect
+      sensible
+      tmux-fzf
+      tmux-thumbs
+      fzf-tmux-url
+      urlview
+      yank
+    ];
+
     extraConfig =
       with config.theme;
       with pkgs.tmuxPlugins;
       ''
-        # Plugins
-        run-shell '${copycat}/share/tmux-plugins/copycat/copycat.tmux'
-        run-shell '${sensible}/share/tmux-plugins/sensible/sensible.tmux'
-        run-shell '${urlview}/share/tmux-plugins/urlview/urlview.tmux'
-
-
         bind-key R run-shell ' \
           tmux source-file /etc/tmux.conf > /dev/null; \
           tmux display-message "sourced /etc/tmux.conf"'
@@ -40,8 +45,6 @@ in
 
         set-option -g status-right ' #{prefix_highlight} "#{=21:pane_title}" %H:%M %d-%b-%y'
         set-option -g status-left-length 40
-        set-option -g @prefix_highlight_fg '${colors.background}'
-        set-option -g @prefix_highlight_bg '${colors.dominant}'
         run-shell '${prefix-highlight}/share/tmux-plugins/prefix-highlight/prefix_highlight.tmux'
 
         # Be faster switching windows
@@ -67,25 +70,18 @@ in
         bind % split-window -h -c "#{pane_current_path}"
         bind '"' split-window -v -c "#{pane_current_path}"
 
-        # Colorscheme
-        set-option -g status-style 'fg=${colors.dimForeground}, bg=${colors.background}'
-
-        set-option -g window-status-current-style 'fg=${colors.dominant}'
-
-        set-option -g pane-border-style 'fg=${colors.background}'
-        set-option -g pane-active-border-style 'fg=${colors.dominant}'
-
-        set-option -g message-style 'fg=${colors.background}, bg=${colors.dimForeground}'
-
-        set-option -g mode-style    'fg=${colors.background}, bg=${colors.dominant}'
-
-        set-option -g display-panes-active-colour '${colors.dominant}'
-        set-option -g display-panes-colour '${colors.dimForeground}'
-
-        set-option -g clock-mode-colour '${colors.dominant}'
-
         set-option -g base-index 1
         set-option -g renumber-windows on
+
+        #set-option -g automatic-rename off
+        #set-option -g allow-rename off
+
+        # Catppuccin theme configuration
+        set -g @catppuccin_flavor "frappe"
+        set -g @catppuccin_window_number "#I"
+        set -g @catppuccin_window_text "#T"
+        set -g @catppuccin_window_current_number "#I"
+        set -g @catppuccin_window_current_text "#T"
       '';
   };
 }
