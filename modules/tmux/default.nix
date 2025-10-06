@@ -38,6 +38,10 @@ in
       with config.theme;
       with pkgs.tmuxPlugins;
       ''
+        # Window naming settings
+        set-option -g automatic-rename off
+        set-option -g allow-rename off
+
         bind-key R run-shell ' \
           tmux source-file /etc/tmux.conf > /dev/null; \
           tmux display-message "sourced /etc/tmux.conf"'
@@ -83,10 +87,6 @@ in
         set -g @catppuccin_window_text "#W"
         set -g @catppuccin_window_current_number "#I"
         set -g @catppuccin_window_current_text "#W"
-
-        # Window naming settings
-        set-option -g automatic-rename off
-        set-option -g allow-rename off
 
         set -g @continuum-restore 'on'
         set -g @resurrect-strategy-nvim 'session'
