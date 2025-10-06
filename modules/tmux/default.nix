@@ -9,6 +9,7 @@ let
     bind s send-prefix
     bind C-s last-window
     set-option -g status-position top
+    set -g @catppuccin_flavor "mocha"
   '';
 in
 {
@@ -86,6 +87,11 @@ in
         # Window naming settings
         set-option -g automatic-rename off
         set-option -g allow-rename off
+
+        set -g @continuum-restore 'on'
+        set -g @resurrect-strategy-nvim 'session'
+        set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
+        set -g @fzf-url-history-limit '2000'
       '';
   };
 }

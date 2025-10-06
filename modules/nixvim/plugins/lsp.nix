@@ -37,7 +37,7 @@ in
         lspBufAction = "implementation";
       }
       {
-        key = "K";
+        key = "<leader>K";
         lspBufAction = "hover";
       }
       {
