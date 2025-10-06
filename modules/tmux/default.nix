@@ -79,9 +79,13 @@ in
         # Catppuccin theme configuration
         set -g @catppuccin_flavor "frappe"
         set -g @catppuccin_window_number "#I"
-        set -g @catppuccin_window_text "#T"
+        set -g @catppuccin_window_text "#W"
         set -g @catppuccin_window_current_number "#I"
-        set -g @catppuccin_window_current_text "#T"
+        set -g @catppuccin_window_current_text "#W"
+
+        # Window naming settings
+        set-option -g automatic-rename off
+        set-option -g allow-rename off
       '';
   };
 }
