@@ -127,8 +127,6 @@
     nmap
     # The new shell
     nushell
-    # For docs
-    pandoc
     # PeteTong
     python3
     # A super file explorer
