@@ -43,8 +43,17 @@
       myvim = "nvim .";
       mn = "myvim";
       n = "nitch";
-      shhh = "sudo shutdown now";
       tk = "tmux kill-session";
     };
+    interactiveShellInit = ''
+      shhh() {
+        if [[ -n "$SSH_CONNECTION" || -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]; then
+          echo "🚫 Cannot shutdown - you're in an SSH session!"
+          echo "Disconnect first or use 'sudo shutdown now' if you really mean it."
+        else
+          sudo shutdown now
+        fi
+      }
+    '';
   };
 }
