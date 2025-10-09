@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
+let
+  netcoredbg-fixed = pkgs.netcoredbg.overrideAttrs (oldAttrs: {
+    cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.5" ];
+  });
+in
 {
   imports = [
     ./colorschemes.nix
@@ -33,6 +38,7 @@
       dotnet-sdk
       gcc
       #netcoredbg
+      netcoredbg-fixed
       nil
       nodejs
       nodePackages.prettier
