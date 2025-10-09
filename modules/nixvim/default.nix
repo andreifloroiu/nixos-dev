@@ -32,7 +32,7 @@
     extraPackages = with pkgs; [
       dotnet-sdk
       gcc
-      netcoredbg
+      #netcoredbg
       nil
       nodejs
       nodePackages.prettier
