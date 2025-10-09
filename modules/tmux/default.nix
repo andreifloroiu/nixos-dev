@@ -78,9 +78,6 @@ in
         set-option -g base-index 1
         set-option -g renumber-windows on
 
-        #set-option -g automatic-rename off
-        #set-option -g allow-rename off
-
         # Catppuccin theme configuration
         set -g @catppuccin_flavor "frappe"
         set -g @catppuccin_window_number "#I"
@@ -92,6 +89,13 @@ in
         set -g @resurrect-strategy-nvim 'session'
         set -g @fzf-url-fzf-options '-p 60%,30% --prompt="   " --border-label=" Open URL "'
         set -g @fzf-url-history-limit '2000'
+
+        set -g @resurrect-strategy-nvim 'session'
+        set -g @resurrect-capture-pane-contents 'on'
+
+        set -g @continuum-restore 'on'
+        set -g @continuum-save-interval '15'
+        set -g @continuum-boot 'on'
       '';
   };
 }
