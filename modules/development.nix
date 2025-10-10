@@ -42,9 +42,19 @@
     oha
     # For certificates
     openssl
+    # For docs
+    pandoc
     python3Packages.virtualenv
     # something I need
     seq-cli
+    (texlive.combine {
+      inherit (texlive)
+        scheme-basic
+        latex-bin
+        latexmk
+        xcolor
+        ;
+    })
     # tldr any command instead of man, e.g. tldr fd
     tldr
     # HTTP load testing tool

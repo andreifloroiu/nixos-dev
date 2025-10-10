@@ -66,7 +66,7 @@ in
       }
       {
         action = "<CMD>Lspsaga hover_doc<Enter>";
-        key = "K";
+        key = "<leader>K";
       }
     ];
     servers = {
@@ -77,7 +77,7 @@ in
       eslint.enable = lib.mkDefault hasNodejs;
       gopls = {
         enable = lib.mkDefault hasGo;
-        settings = {
+        config = {
           gofumpt = true;
           staticcheck = true;
           usePlaceholders = true;
@@ -91,13 +91,13 @@ in
       marksman.enable = true;
       nil_ls = {
         enable = true;
-        settings = {
+        config = {
           autoArchive = true;
         };
       };
       omnisharp = {
         enable = lib.mkDefault hasDotnetSdk;
-        settings = {
+        config = {
           FormattingOptions = {
             EnableEditorConfigSupport = true;
             OrganizImports = true;
@@ -116,7 +116,7 @@ in
       };
       pylsp = {
         enable = lib.mkDefault hasPython;
-        settings = {
+        config = {
           plugins = {
             pycodestyle.enabled = false;
             mccabe.enabled = false;
