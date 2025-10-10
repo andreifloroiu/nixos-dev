@@ -72,6 +72,7 @@
         };
     in
     {
+      overlays.default = customPackagesOverlay;
       nixosModules = {
         base =
           {
