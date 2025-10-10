@@ -4,11 +4,7 @@ let
     pkg: builtins.any (p: p.pname or p.name or "" == pkg) config.environment.systemPackages;
   hasDotnetSdk = hasPackage "dotnet" || hasPackage "dotnet-sdk" || hasPackage "dotnet-sdk_8";
   hasNodejs = hasPackage "nodejs";
-  hasPython = hasPackage "python3";
-  hasGo = hasPackage "go";
-  hasJava = hasPackage "openjdk" || hasPackage "jdk";
 in
-
 {
   imports = [
     ./colorschemes.nix

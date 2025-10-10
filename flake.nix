@@ -35,6 +35,9 @@
     let
       systemAarch64 = "aarch64-linux";
       systemX86_64 = "x86_64-linux";
+      customPackagesOverlay = final: prev: {
+        netcoredbg = final.callPackage ./pkgs/netcoredbg/package.nix { };
+      };
       mkSystem =
         system: hostname:
         nixpkgs.lib.nixosSystem {
@@ -45,6 +48,7 @@
               baseModules = [
                 home-manager.nixosModules.home-manager
                 nixvim.nixosModules.nixvim
+                { nixpkgs.overlays = [ customPackagesOverlay ]; }
                 (./hosts + "/${hostname}.nix")
               ];
               devModules =
