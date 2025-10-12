@@ -36,7 +36,7 @@
       systemAarch64 = "aarch64-linux";
       systemX86_64 = "x86_64-linux";
       customPackagesOverlay = final: prev: {
-        netcoredbg = final.callPackage ./pkgs/netcoredbg/package.nix { };
+        netcoredbg-by-af = final.callPackage ./pkgs/netcoredbg-by-af/package.nix { };
       };
       mkSystem =
         system: hostname:
