@@ -58,6 +58,13 @@
                   ]
                 else
                   [ ];
+              desktopModules =
+                if hostname == "desktop" then
+                  [
+                    ./modules/desktop.nix
+                  ]
+                else
+                  [ ];
               wslModules =
                 if hostname == "wsl" then
                   [
@@ -68,7 +75,7 @@
                 else
                   [ ];
             in
-            baseModules ++ devModules ++ wslModules;
+            baseModules ++ devModules ++ wslModules ++ desktopModules;
         };
     in
     {
@@ -100,6 +107,20 @@
               home-manager.nixosModules.default
               nixvim.nixosModules.default
               ./modules/development.nix
+            ];
+          };
+        desktop =
+          {
+            config,
+            pkgs,
+            lib,
+            ...
+          }:
+          {
+            imports = [
+              home-manager.nixosModules.default
+              nixvim.nixosModules.default
+              ./modules/desktop.nix
             ];
           };
         server =
@@ -137,9 +158,11 @@
         # x86_64 configurations
         "dev-x86_64" = mkSystem systemX86_64 "dev";
         "wsl-x86_64" = mkSystem systemX86_64 "wsl";
+        "desktop-x86_64" = mkSystem systemX86_64 "desktop";
         # aarch64 configurations
         "dev-aarch64" = mkSystem systemAarch64 "dev";
         "wsl-aarch64" = mkSystem systemAarch64 "wsl";
+        "desktop-aarch64" = mkSystem systemAarch64 "desktop";
       };
     };
 }

@@ -151,6 +151,8 @@
     zellij
     # Zip
     zip
+    # zoxide
+    zoxide
     # An incomplete shell (needs a multiplexer)
     zsh
   ];
