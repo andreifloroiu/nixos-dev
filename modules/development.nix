@@ -27,6 +27,7 @@
     gping
     # kubectl
     kubectl
+    k9s
     # lazy but for Docker
     lazydocker
     # lazy SQL
