@@ -12,12 +12,8 @@
     dive
     # ping but with graph
     gping
-    # lazy but for Docker
-    lazydocker
     # For certificates
     openssl
-    # TUI for podman
-    podman-tui
     # tldr any command instead of man, e.g. tldr fd
     tldr
   ];
