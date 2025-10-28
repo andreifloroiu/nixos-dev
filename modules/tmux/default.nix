@@ -91,6 +91,7 @@ in
         set -g @fzf-url-history-limit '2000'
 
         set -g @resurrect-strategy-nvim 'session'
+        set -g @resurrect-processes '~nvim ~mn ~lg ~lazygit ~mc'
         set -g @resurrect-capture-pane-contents 'on'
 
         set -g @continuum-restore 'on'
