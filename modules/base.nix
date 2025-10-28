@@ -1,4 +1,3 @@
-# modules/base.nix
 {
   config,
   pkgs,

@@ -26,6 +26,8 @@
       zinit light romkatv/powerlevel10k
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+      eval "$(atuin init zsh)"
+
       # Disable flow control so CTRL+Q, CTRL+S can be used for bindings (tmux in ssh)
       stty -ixon
       if [[ -z $TMUX ]]; then
