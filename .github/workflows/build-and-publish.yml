@@ -8,14 +8,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Install Nix
-        uses: cachix/install-nix-action@v24
-        with:
-          extra_nix_config: |
-            experimental-features = nix-command flakes
-      - name: Build WSL2 (x86_64)
-        run: |
-          nix build .#nixosConfigurations.wsl-x86_64.config.system.build.tarballBuilder
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@main
         with:
@@ -26,6 +18,14 @@ jobs:
           large-packages: true
           docker-images: true
           swap-storage: true
+      - name: Install Nix
+        uses: cachix/install-nix-action@v24
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - name: Build WSL2 (x86_64)
+        run: |
+          nix build .#nixosConfigurations.wsl-x86_64.config.system.build.tarballBuilder
       - name: Build Tarball
         run: |
           sudo ./result/bin/nixos-wsl-tarball-builder
