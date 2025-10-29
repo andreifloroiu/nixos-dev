@@ -6,20 +6,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    - name: Install Nix
-      uses: cachix/install-nix-action@v24
-      with:
-        extra_nix_config: |
-          experimental-features = nix-command flakes
-    - name: Build WSL2 tarball (x86_64)
-      run: |
-        nix build .#nixosConfigurations.wsl-x86_64.config.system.build.tarball
-        cp result/tarball/nixos-wsl.tar.gz nixos-wsl-x86_64.tar.gz
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: nixos-wsl-x86_64
-        path: nixos-wsl-x86_64.tar.gz
-        retention-days: 7
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v24
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+      - name: Build WSL2 tarball (x86_64)
+        run: |
+          nix build .#nixosConfigurations.wsl-x86_64.config.system.build.tarballBuilder
+          sudo ./result/bin/nixos-wsl-tarball-builder
+          sudo chmod a+rw nixos.wsl
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nixos-wsl-x86_64
+          path: ./nixos.wsl
+          retention-days: 7
