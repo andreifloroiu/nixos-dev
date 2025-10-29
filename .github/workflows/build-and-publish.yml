@@ -16,6 +16,7 @@ jobs:
       - name: Build WSL2 tarball (x86_64)
         run: |
           nix build .#nixosConfigurations.wsl-x86_64.config.system.build.tarballBuilder
+          sudo nix-collect-garbage -d
           sudo ./result/bin/nixos-wsl-tarball-builder
           sudo chmod a+rw nixos.wsl
       - name: Upload artifact
