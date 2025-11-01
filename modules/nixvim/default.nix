@@ -43,7 +43,7 @@ in
       ]
       ++ lib.lists.optionals hasDotnetSdk [
         dotnet-sdk
-        netcoredbg-by-af
+        netcoredbg
         omnisharp-roslyn
       ]
       ++ lib.lists.optionals hasNodejs [
