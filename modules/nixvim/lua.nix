@@ -15,7 +15,7 @@ in
     local dap = require('dap')
     dap.adapters.coreclr = {
         type = 'executable',
-        command = '${pkgs.netcoredbg-by-af}/bin/netcoredbg',
+        command = '${pkgs.netcoredbg}/bin/netcoredbg',
         args = { '--interpreter=vscode' }
       }
       dap.configurations.cs = {
