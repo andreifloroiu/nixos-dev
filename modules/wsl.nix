@@ -17,6 +17,7 @@
       enable = lib.mkDefault true;
     };
     wslConf = {
+      interop.appendWindowsPath = lib.mkDefault false;
       network.generateHosts = lib.mkDefault false;
     };
   };

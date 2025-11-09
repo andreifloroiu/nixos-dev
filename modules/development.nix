@@ -23,6 +23,8 @@
     gh
     # GCP CLI
     google-cloud-sdk
+    # and Gemini CLI
+    gemini-cli
     # ping but with graph
     gping
     # kubectl
@@ -58,6 +60,8 @@
     })
     # tldr any command instead of man, e.g. tldr fd
     tldr
+    # TUI client for SQL
+    usql
     # HTTP load testing tool
     vegeta
     # NodeJS package manager
