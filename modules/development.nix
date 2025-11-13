@@ -29,6 +29,7 @@
     gping
     # kubectl
     kubectl
+    kubernetes-helm
     k9s
     # lazy but for Docker
     lazydocker
