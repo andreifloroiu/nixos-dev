@@ -15,6 +15,7 @@
       combinePackages [
         sdk_8_0
         sdk_9_0
+        sdk_10_0
       ]
     )
     # Analyse docker images
@@ -27,8 +28,11 @@
     gemini-cli
     # ping but with graph
     gping
-    # kubectl
+    # kubectl and its relatives
     kubectl
+    kubectx
+    kubernetes-helm
+    kustomize
     k9s
     # lazy but for Docker
     lazydocker
