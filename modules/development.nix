@@ -27,9 +27,11 @@
     gemini-cli
     # ping but with graph
     gping
-    # kubectl
+    # kubectl and its relatives
     kubectl
+    kubectx
     kubernetes-helm
+    kustomize
     k9s
     # lazy but for Docker
     lazydocker
