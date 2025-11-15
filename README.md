@@ -104,10 +104,14 @@ wsl --import NixOS $env:USERPROFILE\NixOS\ nixos-wsl.tar.gz --version 2
 
 2. ```cd``` into it
 
-3. Build an ```sd-image``` for target, e.g. 
+3. Build an ```sd-image``` for target, e.g.
     ```nix build '.#nixosConfigurations.jump-x86_64.config.system.build.sd-image'```
     or ```nix build '.#nixosConfigurations.jump-aarch64.config.system.build.sd-image'```
 
-## More Read
+## Other Notes
 
-- [seq CLI](./docs/README.seq.md)
+How to get *sha256*:
+
+```sh
+nix flake prefetch github:google-gemini/gemini-cli/v0.15.3
+```
