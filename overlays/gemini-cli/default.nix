@@ -3,8 +3,9 @@ final: prev: {
     src = prev.fetchFromGitHub {
       owner = "google-gemini";
       repo = "gemini-cli";
-      tag = "v15.3";
-      hash = "sha256-43ohCUqdM0quxwoN3s/3vOq4IRc+sck+BkAfqMEDq8g=";
+      tag = "v0.15.3";
+      # Run `nix flake prefetch github:google-gemini/gemini-cli/v0.15.3`
+      hash = "sha256-aa5ca13ef9e425ca0f895d6d7466591a7e9d96e7";
     };
   });
 }
