@@ -107,7 +107,3 @@ wsl --import NixOS $env:USERPROFILE\NixOS\ nixos-wsl.tar.gz --version 2
 3. Build an ```sd-image``` for target, e.g. 
     ```nix build '.#nixosConfigurations.jump-x86_64.config.system.build.sd-image'```
     or ```nix build '.#nixosConfigurations.jump-aarch64.config.system.build.sd-image'```
-
-## More Read
-
-- [seq CLI](./docs/README.seq.md)
