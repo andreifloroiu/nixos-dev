@@ -51,7 +51,6 @@
                 if hostname == "dev" then
                   [
                     ./modules/development.nix
-                    { nixpkgs.overlays = [ self.overlays.gemini-cli ]; }
                   ]
                 else
                   [ ];
@@ -59,7 +58,6 @@
                 if hostname == "desktop" then
                   [
                     ./modules/desktop.nix
-                    { nixpkgs.overlays = [ self.overlays.gemini-cli ]; }
                   ]
                 else
                   [ ];
@@ -69,7 +67,6 @@
                     ./modules/wsl.nix
                     nixos-wsl.nixosModules.default
                     vscode-server.nixosModules.default
-                    { nixpkgs.overlays = [ self.overlays.gemini-cli ]; }
                   ]
                 else
                   [ ];
@@ -78,8 +75,6 @@
         };
     in
     {
-      overlays.gemini-cli = import ./overlays/gemini-cli/default.nix;
-
       nixosModules = {
         base =
           {
