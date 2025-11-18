@@ -45,6 +45,8 @@
     #nodejs_18
     nodePackages.node-gyp
     nodePackages.node-gyp-build
+    # aaah, mermaid
+    mermaid-cli
     # HTTP load generator
     oha
     # For certificates
