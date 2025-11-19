@@ -1,12 +1,18 @@
 {
+  lib,
   pkgs,
   ...
 }:
+let
+  pkgsNixosDev = lib.attrsets.recursiveUpdate pkgs (
+    import ../pkgs/gemini-cli-latest.nix { inherit pkgs; }
+  );
+in
 {
   imports = [
     ./base.nix
   ];
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgsNixosDev; [
     # Azure CLI... needed, not wanted
     #azure-cli
     # .NET SDK packages
@@ -25,7 +31,8 @@
     # GCP CLI
     google-cloud-sdk
     # and Gemini CLI
-    gemini-cli
+    #gemini-cli
+    gemini-cli-latest
     # ping but with graph
     gping
     # kubectl and its relatives

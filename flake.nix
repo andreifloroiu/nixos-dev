@@ -42,7 +42,11 @@
           specialArgs = { inherit inputs; };
           modules =
             let
+              overlays = import ./overlays;
               baseModules = [
+                ({ pkgs, ... }: {
+                  nixpkgs.overlays = builtins.attrValues overlays;
+                })
                 home-manager.nixosModules.home-manager
                 nixvim.nixosModules.nixvim
                 (./hosts + "/${hostname}.nix")
