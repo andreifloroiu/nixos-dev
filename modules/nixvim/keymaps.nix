@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
 
   #
   # cmp (autocomplete) keymaps are in cmp.nix and it would like bellow
@@ -81,7 +82,10 @@
       options.desc = "Delete and paste from the black hole register";
     }
     {
-      mode = ["n" "v"];
+      mode = [
+        "n"
+        "v"
+      ];
       action = "[[\"y]]";
       key = "<leader>y";
       options.desc = "Yanks the text that is selected by the motion command that follows, of the previous function or block";
@@ -93,23 +97,24 @@
       options.desc = "Yanks the entire line of the previous function or block";
     }
     {
-      mode = ["n" "v"];
+      mode = [
+        "n"
+        "v"
+      ];
       action = "\"_d";
       key = "<leader>d";
       options.desc = "Delete into the black hole register";
     }
     {
       mode = "n";
-      action = "vim.lsp.buf.format";
+      action.__raw = "vim.lsp.buf.format";
       key = "<leader>f";
-      lua = true;
       options.silent = true;
     }
     {
       mode = "n";
-      action = "MiniFiles.open";
+      action.__raw = "MiniFiles.open";
       key = "<leader>w";
-      lua = true;
       options = {
         desc = "Open mini.files";
         silent = true;
