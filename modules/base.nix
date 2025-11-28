@@ -170,6 +170,7 @@
         init.defaultBranch = "master";
       };
     };
+    nix-index.enable = true;
     # Enable nix-ld for running dynamic executables
     nix-ld = {
       enable = lib.mkDefault true;
@@ -188,11 +189,19 @@
 
   # Some nerd fonts
   fonts = {
+    enableDefaultPackages = true;
+    enableGhostscriptFonts = true;
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
     ];
-    enableDefaultPackages = true;
-    fontconfig.enable = true;
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Noto Sans" ];
+        monospace = [ "JetBrainsMono Nerd Font" ];
+      };
+    };
   };
 
   # Basic security settings

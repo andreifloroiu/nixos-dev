@@ -35,10 +35,12 @@
       fi
     '';
     shellAliases = {
-      la = "eza -lh";
+      la = "eza -halF";
+      l = "la";
       ld = "lazydocker";
       lg = "lazygit";
       lj = "lazyjournal";
+      gs = "git status";
       node22 = "nix shell nixpkgs#nodejs_22";
       node20 = "nix shell nixpkgs#nodejs_20";
       node18 = "nix shell nixpkgs#nodejs_18";
