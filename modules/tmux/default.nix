@@ -5,9 +5,9 @@ let
   remoteConf = builtins.toFile "tmux.remote.conf" ''
     unbind C-q
     unbind q
-    set-option -g prefix C-s
-    bind s send-prefix
-    bind C-s last-window
+    set-option -g prefix C-a
+    bind a send-prefix
+    bind C-a last-window
     set-option -g status-position top
     set -g @catppuccin_flavor "mocha"
   '';
