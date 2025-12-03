@@ -35,7 +35,7 @@
       fi
     '';
     shellAliases = {
-      la = "eza -halF";
+      la = "eza -la";
       l = "la";
       ld = "lazydocker";
       lg = "lazygit";
