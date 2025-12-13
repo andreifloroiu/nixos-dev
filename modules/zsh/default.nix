@@ -35,17 +35,19 @@
       fi
     '';
     shellAliases = {
-      la = "eza -halF";
+      la = "eza -la";
       l = "la";
       ld = "lazydocker";
       lg = "lazygit";
       lj = "lazyjournal";
       gs = "git status";
+      node24 = "nix shell nixpkgs#nodejs_24";
       node22 = "nix shell nixpkgs#nodejs_22";
       node20 = "nix shell nixpkgs#nodejs_20";
       node18 = "nix shell nixpkgs#nodejs_18";
       myvim = "nvim .";
       mn = "myvim";
+      rtty = "exec $SHELL; clear";
       n = "nitch";
       tk = "tmux kill-session";
     };
